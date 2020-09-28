@@ -22,7 +22,7 @@ export default {
       outputStyle: 'compressed'
     }),
     terser(),
-    serve('public'),
+    serve(['public', 'static']),
     livereload('public')
   ]
 }
