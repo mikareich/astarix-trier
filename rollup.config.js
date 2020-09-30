@@ -9,20 +9,20 @@ export default {
   input: 'src/index.js',
   output: {
     file: 'public/bundle.js',
-    format: 'iife'
+    format: 'iife',
   },
   plugins: [
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
     }),
     resolve(),
     commonjs(),
     scss({
       file: 'public/bundle.css',
-      outputStyle: 'compressed'
+      outputStyle: 'compressed',
     }),
     terser(),
-    serve(['public', 'static']),
-    livereload('public')
-  ]
+    serve(['public']),
+    livereload('public'),
+  ],
 }
