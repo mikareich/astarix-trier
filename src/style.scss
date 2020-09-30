@@ -21,8 +21,14 @@ body {
   gap: 20px;
 
   .nav__link {
-    clear: both;
+    color: $text;
+    text-decoration: unset;
+    transition: 200ms;
+    &:hover {
+      color: $primary;
+    }
   }
   .nav__link-title {
+    margin-right: auto;
   }
 }
