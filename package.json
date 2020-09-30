@@ -17,7 +17,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "watch": "rollup -c -w"
+    "serve": "rollup -c -w"
   },
   "repository": {
     "type": "git",
