@@ -19,4 +19,10 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+
+  .nav__link {
+    clear: both;
+  }
+  .nav__link-title {
+  }
 }
