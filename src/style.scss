@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import './colors.scss';
-
 * {
   box-sizing: border-box;
 }
@@ -14,21 +13,44 @@ body {
 
 .nav {
   width: 100vw;
-  height: 75px;
-  padding: 0 40px;
-  display: flex;
+  height: 70px;
+  padding: 10px 40px;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto);
   align-items: center;
   gap: 20px;
 
+  grid-template-areas: 'title link link link';
+
+  #drawerTrigger {
+    display: none;
+    grid-area: trigger;
+  }
+
   .nav__link {
+    grid-area: link;
     color: $text;
     text-decoration: unset;
     transition: 200ms;
+    margin-left: auto;
+    width: fit-content;
+    @media (min-width: 501px) {
+      &:nth-child(3) {
+        grid-column: 2;
+      }
+      &:nth-child(4) {
+        grid-column: 3;
+      }
+      &:nth-child(5) {
+        grid-column: 4;
+      }
+    }
     &:hover {
       color: $primary;
     }
   }
   .nav__link-title {
-    margin-right: auto;
+    grid-area: title;
+    margin-left: 0;
   }
 }

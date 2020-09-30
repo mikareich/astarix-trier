@@ -1,0 +1,32 @@
+@media (max-width: 500px) {
+  .nav {
+    grid-template-areas: 'title trigger';
+    grid-template-columns: 1fr auto;
+    &:not(.collapsed)
+      .nav__link:not(#drawerTrigger).nav__link:not(.nav__link-title) {
+      display: none;
+    }
+    #drawerTrigger {
+      display: block;
+    }
+    &.collapsed {
+      .nav__link {
+        display: block;
+      }
+      grid-column: 2;
+      grid-template-areas: 'title trigger' '. link' '. link' '. link';
+      grid-template-columns: auto 1fr;
+      grid-template-rows: repeat(4, 50px);
+      height: auto;
+      .nav__link {
+        justify-self: right;
+        &:nth-child(3) {
+          grid-row: 2;
+        }
+        &:last-child {
+          grid-row: 4;
+        }
+      }
+    }
+  }
+}
