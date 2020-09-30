@@ -11,4 +11,11 @@ body {
   margin: 0;
 }
 
-.nav 
+.nav {
+  width: 100vw;
+  height: 75px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
