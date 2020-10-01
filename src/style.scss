@@ -6,7 +6,6 @@
 
 html,
 body {
-  height: 120vh;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
 }
@@ -38,4 +37,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+section {
+  padding: 20px 40px;
 }
