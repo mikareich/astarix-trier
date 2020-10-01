@@ -1,5 +1,4 @@
 import './style.scss'
-import './responsive.scss'
 
 // drawer
 const drawerTriggerDIV = document.querySelector('#drawerTrigger')
