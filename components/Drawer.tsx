@@ -1,8 +1,9 @@
-import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { motion } from "framer-motion";
+import React from "react";
 import { useRecoilState } from "recoil";
+
 import { DrawerProps } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";

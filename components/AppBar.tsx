@@ -1,13 +1,14 @@
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 import { useRecoilState } from "recoil";
-import appBarStyles from "../styles/AppBar.module.scss";
+
 import { AppBarProps } from "../interfaces";
-import Drawer from "./Drawer";
-import { drawerRoutes } from "../utils/routes";
+import appBarStyles from "../styles/AppBar.module.scss";
 import { drawerState } from "../utils/atoms";
+import { drawerRoutes } from "../utils/routes";
+import Drawer from "./Drawer";
 
 const AppBar: React.FC<AppBarProps> = ({
   routes,
@@ -47,7 +48,11 @@ const AppBar: React.FC<AppBarProps> = ({
           );
         })}
         {drawer && (
-          <button type="button" className={appBarStyles.iconButton}>
+          <button
+            type="button"
+            className={appBarStyles.iconButton}
+            aria-label="Öffne Drawer"
+          >
             <MdMenu size={24} onClick={toggleDrawer} />
           </button>
         )}
