@@ -66,3 +66,12 @@ export interface Category {
 export interface MenuProps {
   menu: Category[];
 }
+
+export interface VeganProps {
+  size?: number;
+}
+
+export interface AstarixLogoProps {
+  color: "red" | "gray" | "black";
+  size?: number;
+}
