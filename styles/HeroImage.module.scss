@@ -1,0 +1,17 @@
+.container,
+.container * {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+@media only screen and (max-width: 568px) {
+  .container,
+  .container * {
+    height: 300px;
+  }
+}

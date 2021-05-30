@@ -1,0 +1,54 @@
+@import "./colors.scss";
+
+.MenuItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.MenuItem {
+  display: grid;
+  grid-template:
+    "title vegan space price" auto
+    "description description description description" auto
+    "variants variants variants variants" auto / auto auto 1fr auto;
+  gap: 5px;
+}
+
+.title {
+  grid-area: title;
+  font-weight: 600;
+}
+
+.vegan {
+  grid-area: vegan;
+}
+
+.space {
+  grid-area: space;
+  border-bottom: 2px dotted $black;
+  height: 1.25rem;
+}
+
+.price {
+  grid-area: price;
+}
+
+.description {
+  grid-area: description;
+  color: $gray;
+}
+
+.variants {
+  grid-area: variants;
+}
+
+@media screen and (max-width: 568px) {
+  .MenuItem {
+    grid-template:
+      "title vegan" auto
+      "description description" auto
+      "variants variants" auto
+      "price price" auto / 1fr auto;
+  }
+}

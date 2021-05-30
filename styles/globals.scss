@@ -1,0 +1,39 @@
+@import "./colors.scss";
+@import "./typographie.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 500px;
+  width: 100%;
+}
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 500px;
+  width: 100%;
+}
+
+iframe {
+  width: 100%;
+}
+
+@media screen and (max-width: 568px) {
+  .gmap_canvas,
+  .mapouter,
+  iframe {
+    height: 300px;
+  }
+}
