@@ -1,0 +1,49 @@
+.layout {
+  display: grid;
+  grid-template:
+    "navBar" auto
+    "hero" auto
+    "main" 1fr
+    "footer" auto / 1fr;
+  min-height: 100vh;
+}
+
+.navBar {
+  grid-area: navBar;
+}
+
+.hero {
+  margin-top: -70px;
+  grid-area: hero;
+}
+
+.main {
+  grid-area: main;
+  padding: 30px 150px;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .main {
+    padding: 30px 100px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main {
+    padding: 30px 50px;
+  }
+}
+
+@media only screen and (max-width: 568px) {
+  .main {
+    padding: 10px 30px;
+  }
+
+  .hero {
+    margin-top: -50px;
+  }
+}

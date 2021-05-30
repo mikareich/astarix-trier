@@ -1,0 +1,91 @@
+@import "./colors.scss";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: $black;
+}
+
+h1 {
+  font-size: 2.488rem;
+}
+
+h2 {
+  font-size: 2.074rem;
+}
+
+h3 {
+  font-size: 1.728rem;
+}
+
+h4 {
+  font-size: 1.144rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+}
+
+p,
+a,
+h6 {
+  font-size: 1rem;
+}
+
+a {
+  font-family: "Open Sans", sans-serif;
+  text-decoration: unset;
+  color: $red;
+  transition: 200ms;
+}
+
+a.inactive {
+  color: $gray;
+}
+
+a.active,
+a:hover,
+a:focus {
+  color: $red !important;
+}
+
+a.active {
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  width: 100%;
+  height: 1px;
+  background-color: $gray;
+}
+
+li::marker {
+  color: $gray;
+}
+
+::selection {
+  background-color: transparentize($color: $red, $amount: 0.7);
+}
+
+@media (max-width: 568px) {
+  h1 {
+    font-size: 2.074rem;
+  }
+
+  h2 {
+    font-size: 1.728rem;
+  }
+
+  h3 {
+    font-size: 1.144rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+}
