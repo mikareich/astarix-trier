@@ -17,11 +17,6 @@ export const descriptionState = atom({
   default: "",
 });
 
-export const menuState = atom<ICategory[]>({
-  key: "menuState",
-  default: [],
-});
-
 export const heroState = atom<ICosmicImage>({
   key: "heroState",
   default: undefined,
