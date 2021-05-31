@@ -1,38 +1,35 @@
 import Cosmic from "cosmicjs";
 
-import { ICategory, IProduct } from "../interfaces";
+import { ICategory, IPageProps, IProduct } from "../interfaces";
 import markdownToHTML from "./markdownToHTML";
 
-export const api = Cosmic();
+const api = Cosmic();
 
-export const bucket = api.bucket({
+const bucket = api.bucket({
   slug: process.env.COSMIC_SLUG,
   read_key: process.env.COSMIC_READ_KEY,
 });
 
-export async function getObject(id: string, props: string = undefined) {
+export async function getPageProps(pageId: string): Promise<IPageProps> {
+  const props = "title,metadata";
+
   const data = await bucket.getObject({
-    id,
+    id: pageId,
     props,
   });
 
-  return data?.object;
-}
-
-export async function getPageProps(pageId: string) {
-  const props = "title,metadata";
-
-  const { title, metadata } = await getObject(pageId, props);
-  const { hero, content } = metadata;
+  const { title } = data.object;
+  const { hero, content, description } = data.object.metadata;
 
   return {
     title,
     heroImage: hero,
     content: await markdownToHTML(content),
+    description,
   };
 }
 
-export async function getMenu() {
+export async function getMenu(): Promise<ICategory[]> {
   const props =
     "title,id,metadata.note,metadata.products.title,metadata.products.id,metadata.products.metadata";
 

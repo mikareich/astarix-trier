@@ -35,6 +35,7 @@ export interface IPageProps {
   title: string;
   heroImage: ICosmicImage;
   content: string;
+  description?: string;
 }
 
 export interface IAppProps {
