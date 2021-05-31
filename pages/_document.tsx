@@ -6,10 +6,6 @@ import Document, {
   NextScript,
 } from "next/document";
 import React from "react";
-import { ParallaxProvider } from "react-scroll-parallax";
-import { RecoilRoot, useRecoilValue } from "recoil";
-
-import { descriptionState, titleState } from "../utils/atoms";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
