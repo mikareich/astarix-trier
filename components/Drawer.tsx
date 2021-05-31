@@ -8,7 +8,7 @@ import { IDrawerProps } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
 
-const Drawer: React.FC<IDrawerProps> = ({ routes }) => {
+function Drawer({ routes }: IDrawerProps) {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
@@ -55,6 +55,6 @@ const Drawer: React.FC<IDrawerProps> = ({ routes }) => {
       </div>
     </motion.aside>
   );
-};
+}
 
 export default Drawer;

@@ -19,6 +19,7 @@ export interface IDrawerProps {
 export interface ILayoutProps {
   pageTitle: string;
   metaDescription?: string;
+  children: React.ReactNode;
 }
 
 export interface ICosmicImage {
