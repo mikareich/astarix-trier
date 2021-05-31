@@ -7,7 +7,7 @@ import heroImageStyles from "../styles/HeroImage.module.scss";
 import layoutStyles from "../styles/Layout.module.scss";
 
 function HeroImage({ src, alt }: IHeroImageProps) {
-  const yOffset = [-50, 50];
+  const yOffset = [-30, 30];
   return (
     <Parallax
       className={`${layoutStyles.hero} ${heroImageStyles.container}`}
