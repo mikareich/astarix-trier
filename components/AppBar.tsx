@@ -4,17 +4,11 @@ import React from "react";
 import { MdMenu } from "react-icons/md";
 import { useRecoilState } from "recoil";
 
-import { AppBarProps } from "../interfaces";
+import { IAppBarProps } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
 import { drawerState } from "../utils/atoms";
-import { drawerRoutes } from "../utils/routes";
-import Drawer from "./Drawer";
 
-const AppBar: React.FC<AppBarProps> = ({
-  routes,
-  drawer = false,
-  fixed = false,
-}) => {
+const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
@@ -23,15 +17,19 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <>
-      {fixed && <div className={appBarStyles.layer} />}
+      {position === "top" && <div className={appBarStyles.layer} />}
       <nav
         className={`
                       ${appBarStyles.appBar}
-                      ${fixed ? appBarStyles.fixed : ""}
+                      ${
+                        position === "top"
+                          ? appBarStyles.top
+                          : appBarStyles.bottom
+                      }
                       `}
       >
-        {routes.map(({ title, pathname, leading }) => {
-          const isActive = router.pathname === pathname;
+        {routes.map(({ title, slug, leading, id }) => {
+          const isActive = router.pathname === slug;
           const className = `
             ${appBarStyles.link} 
             ${leading ? appBarStyles.leading : "inactive"}
@@ -39,7 +37,7 @@ const AppBar: React.FC<AppBarProps> = ({
           `;
 
           return (
-            <Link href={pathname} passHref key={pathname}>
+            <Link href={slug} passHref key={id}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className={className}>
                 {title}
@@ -47,17 +45,14 @@ const AppBar: React.FC<AppBarProps> = ({
             </Link>
           );
         })}
-        {drawer && (
-          <button
-            type="button"
-            className={appBarStyles.iconButton}
-            aria-label="Öffne Drawer"
-          >
-            <MdMenu size={24} onClick={toggleDrawer} />
-          </button>
-        )}
+        <button
+          type="button"
+          className={appBarStyles.iconButton}
+          aria-label="Öffne Drawer"
+        >
+          <MdMenu size={24} onClick={toggleDrawer} />
+        </button>
       </nav>
-      {drawer && <Drawer routes={drawerRoutes} show={showDrawer} />}
     </>
   );
 };

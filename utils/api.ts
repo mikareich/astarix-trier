@@ -1,38 +1,45 @@
 import Cosmic from "cosmicjs";
 
-import { Category, Product } from "../interfaces";
+import { ICategory, IPageProps, IProduct } from "../interfaces";
 import markdownToHTML from "./markdownToHTML";
+import routes from "./routes";
 
-export const api = Cosmic();
+const api = Cosmic();
 
-export const bucket = api.bucket({
+const bucket = api.bucket({
   slug: process.env.COSMIC_SLUG,
   read_key: process.env.COSMIC_READ_KEY,
 });
 
-export async function getObject(id: string, props: string = undefined) {
+export async function getIndexDescription(): Promise<string> {
+  const { id } = routes[0];
+  const props = "metadata.description";
+
+  const data = await bucket.getObject({ id, props });
+
+  return data.object.metadata.description;
+}
+
+export async function getPageProps(pageId: string): Promise<IPageProps> {
+  const props = "title,metadata";
+
   const data = await bucket.getObject({
-    id,
+    id: pageId,
     props,
   });
 
-  return data?.object;
-}
-
-export async function getPageProps(pageId: string) {
-  const props = "title,metadata";
-
-  const { title, metadata } = await getObject(pageId, props);
-  const { hero, content } = metadata;
+  const { title } = data.object;
+  const { hero, content, description } = data.object.metadata;
 
   return {
     title,
     heroImage: hero,
     content: await markdownToHTML(content),
+    description: description || (await getIndexDescription()),
   };
 }
 
-export async function getMenu() {
+export async function getMenu(): Promise<ICategory[]> {
   const props =
     "title,id,metadata.note,metadata.products.title,metadata.products.id,metadata.products.metadata";
 
@@ -49,7 +56,7 @@ export async function getMenu() {
   });
 
   // parse categories
-  const parseProduct = (product): Product => ({
+  const parseProduct = (product): IProduct => ({
     title: product.title,
     vegan: product?.metadata?.vegan || false,
     description: product?.metadata?.description || "",
@@ -58,14 +65,14 @@ export async function getMenu() {
     id: product.id,
   });
 
-  const parseCategory = (category): Category => ({
+  const parseCategory = (category): ICategory => ({
     title: category.title,
     note: category.metadata?.note || "",
     products: category.metadata?.products?.map(parseProduct) || [],
     id: category.id,
   });
 
-  const parsedCategories: Category[] = categories.objects.map(parseCategory);
+  const parsedCategories: ICategory[] = categories.objects.map(parseCategory);
 
   return parsedCategories;
 }

@@ -5,23 +5,31 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import { RecoilRoot, useRecoilValue } from "recoil";
 
 import AppBar from "../components/AppBar";
+import Drawer from "../components/Drawer";
 import HeroImage from "../components/HeroImage";
 import Layout from "../components/Layout";
-import { AppProps } from "../interfaces";
+import { IAppProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { descriptionState, heroState, titleState } from "../utils/atoms";
-import { footerRoutes, navBarRoutes } from "../utils/routes";
+import {
+  descriptionState,
+  drawerState,
+  heroState,
+  titleState,
+} from "../utils/atoms";
+import { drawerRoutes, footerRoutes, navBarRoutes } from "../utils/routes";
 
-function PopulatedLayout({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: IAppProps) {
+  const heroImage = useRecoilValue(heroState);
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
-  const heroImage = useRecoilValue(heroState);
+  const showDrawer = useRecoilValue(drawerState);
 
   return (
     <Layout pageTitle={title} metaDescription={description}>
+      <Drawer routes={drawerRoutes} show={showDrawer} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
-          <AppBar routes={navBarRoutes} drawer fixed />
+          <AppBar routes={navBarRoutes} position="top" />
         </header>
         <HeroImage
           src={
@@ -32,22 +40,21 @@ function PopulatedLayout({ Component, pageProps }: AppProps) {
         />
         <Component {...pageProps} />
         <footer className={layoutStyles.footer}>
-          <hr />
-          <AppBar routes={footerRoutes} />
+          <AppBar routes={footerRoutes} position="bottom" />
         </footer>
       </div>
     </Layout>
   );
 }
 
-function App({ Component, pageProps }: AppProps) {
+function AppContainer({ Component, pageProps }: IAppProps) {
   return (
     <RecoilRoot>
       <ParallaxProvider scrollAxis="vertical">
-        <PopulatedLayout Component={Component} pageProps={pageProps} />
+        <App Component={Component} pageProps={pageProps} />
       </ParallaxProvider>
     </RecoilRoot>
   );
 }
 
-export default App;
+export default AppContainer;

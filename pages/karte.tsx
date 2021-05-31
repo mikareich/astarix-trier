@@ -1,25 +1,33 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import Menu from "../components/Menu";
-import { MenuProps, PageProps } from "../interfaces";
+import Category from "../components/Category";
+import { IMenuProps, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMenu, getPageProps } from "../utils/api";
-import { heroState, titleState } from "../utils/atoms";
+import { descriptionState, heroState, titleState } from "../utils/atoms";
 
-function Karte({ title, heroImage, content, menu }: PageProps & MenuProps) {
+function Karte({
+  title,
+  heroImage,
+  content,
+  description,
+  menu,
+}: IPageProps & IMenuProps) {
   const [, setTitle] = useRecoilState(titleState);
+  const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);
 
   useEffect(() => {
     setTitle(title);
+    setDescription(description);
     setHeroImage(heroImage);
   }, []);
 
   return (
     <main className={layoutStyles.main}>
       <div dangerouslySetInnerHTML={{ __html: content }} />
-      <Menu menu={menu} />
+      {menu.map(Category)}
     </main>
   );
 }

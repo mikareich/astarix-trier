@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilState } from "recoil";
 
-import { DrawerProps } from "../interfaces";
+import { IDrawerProps } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
 
-const Drawer: React.FC<DrawerProps> = ({ routes }) => {
+function Drawer({ routes }: IDrawerProps) {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
@@ -32,18 +32,19 @@ const Drawer: React.FC<DrawerProps> = ({ routes }) => {
     <motion.aside
       variants={variants}
       animate={showDrawer ? "visible" : "hidden"}
+      initial="hidden"
       className={drawerStyles.drawerContainer}
     >
       <div className={drawerStyles.drawer}>
-        {routes.map(({ title, pathname }) => {
-          const isActive = router.pathname === pathname;
+        {routes.map(({ title, slug, id }) => {
+          const isActive = router.pathname === slug;
           const className = `
           ${drawerStyles.link} 
           ${isActive ? "active" : "inactive"}
           `;
 
           return (
-            <Link href={pathname} passHref key={pathname}>
+            <Link href={slug} passHref key={id}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className={className} onClick={closeDrawer}>
                 {title}
@@ -54,6 +55,6 @@ const Drawer: React.FC<DrawerProps> = ({ routes }) => {
       </div>
     </motion.aside>
   );
-};
+}
 
 export default Drawer;

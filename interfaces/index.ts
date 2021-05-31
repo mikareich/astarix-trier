@@ -1,53 +1,55 @@
 import React from "react";
 
-export type Route = {
+export interface IRoute {
   title: string | React.ReactChild;
-  pathname: string;
+  slug: string;
+  id: string;
   leading?: boolean;
-};
-
-export interface AppBarProps {
-  routes: Route[];
-  drawer?: boolean;
-  fixed?: boolean;
 }
 
-export interface DrawerProps {
-  routes: Route[];
+export interface IAppBarProps {
+  routes: IRoute[];
+  position: "top" | "bottom";
+}
+
+export interface IDrawerProps {
+  routes: IRoute[];
   show?: boolean;
 }
 
-export interface LayoutProps {
+export interface ILayoutProps {
   pageTitle: string;
   metaDescription?: string;
+  children: React.ReactNode;
 }
 
-export interface CosmicImage {
+export interface ICosmicImage {
   url: string;
   imgix_url: string;
 }
 
-export interface Description {
+export interface IDescription {
   description: string;
 }
 
-export interface PageProps {
+export interface IPageProps {
   title: string;
-  heroImage: CosmicImage;
+  heroImage: ICosmicImage;
   content: string;
+  description: string;
 }
 
-export interface AppProps {
+export interface IAppProps {
   Component: React.ComponentClass;
-  pageProps: PageProps;
+  pageProps: IPageProps;
 }
 
-export interface HeroImageProps {
+export interface IHeroImageProps {
   src: string;
   alt: string;
 }
 
-export interface Product {
+export interface IProduct {
   title: string;
   vegan: boolean;
   description: string;
@@ -56,13 +58,22 @@ export interface Product {
   id: string;
 }
 
-export interface Category {
+export interface ICategory {
   title: string;
   note: string;
-  products: Product[];
+  products: IProduct[];
   id: string;
 }
 
-export interface MenuProps {
-  menu: Category[];
+export interface IMenuProps {
+  menu: ICategory[];
+}
+
+export interface VeganProps {
+  size?: number;
+}
+
+export interface AstarixLogoProps {
+  color: "red" | "gray" | "black";
+  size?: number;
 }

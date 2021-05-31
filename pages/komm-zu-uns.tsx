@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { Description, PageProps } from "../interfaces";
+import { IDescription, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getPageProps } from "../utils/api";
 import { descriptionState, heroState, titleState } from "../utils/atoms";
 
-function KommZuUns({
-  title,
-  heroImage,
-  content,
-  description,
-}: PageProps & Description) {
+function KommZuUns({ title, heroImage, content, description }: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);
