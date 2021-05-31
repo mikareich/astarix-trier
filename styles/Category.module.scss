@@ -7,3 +7,12 @@
   flex-direction: column;
   gap: 20px;
 }
+
+@media screen and (max-width: 568px) {
+  .products {
+    gap: 10px;
+  }
+  .category {
+    margin-bottom: 40px;
+  }
+}
