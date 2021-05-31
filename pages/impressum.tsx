@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { Description, PageProps } from "../interfaces";
+import { IDescription, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getPageProps } from "../utils/api";
 import { descriptionState, heroState, titleState } from "../utils/atoms";
@@ -11,7 +11,7 @@ function Impressum({
   heroImage,
   content,
   description,
-}: PageProps & Description) {
+}: IPageProps & IDescription) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);

@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React from "react";
 
-import { LayoutProps } from "../interfaces";
+import { ILayoutProps } from "../interfaces";
 
-const Layout: React.FC<LayoutProps> = ({
+const Layout: React.FC<ILayoutProps> = ({
   pageTitle,
   metaDescription = "",
   children,

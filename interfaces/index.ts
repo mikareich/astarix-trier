@@ -6,48 +6,47 @@ export type Route = {
   leading?: boolean;
 };
 
-export interface AppBarProps {
+export interface IAppBarProps {
   routes: Route[];
-  drawer?: boolean;
-  fixed?: boolean;
+  position: "top" | "bottom";
 }
 
-export interface DrawerProps {
+export interface IDrawerProps {
   routes: Route[];
   show?: boolean;
 }
 
-export interface LayoutProps {
+export interface ILayoutProps {
   pageTitle: string;
   metaDescription?: string;
 }
 
-export interface CosmicImage {
+export interface ICosmicImage {
   url: string;
   imgix_url: string;
 }
 
-export interface Description {
+export interface IDescription {
   description: string;
 }
 
-export interface PageProps {
+export interface IPageProps {
   title: string;
-  heroImage: CosmicImage;
+  heroImage: ICosmicImage;
   content: string;
 }
 
-export interface AppProps {
+export interface IAppProps {
   Component: React.ComponentClass;
-  pageProps: PageProps;
+  pageProps: IPageProps;
 }
 
-export interface HeroImageProps {
+export interface IHeroImageProps {
   src: string;
   alt: string;
 }
 
-export interface Product {
+export interface IProduct {
   title: string;
   vegan: boolean;
   description: string;
@@ -56,15 +55,15 @@ export interface Product {
   id: string;
 }
 
-export interface Category {
+export interface ICategory {
   title: string;
   note: string;
-  products: Product[];
+  products: IProduct[];
   id: string;
 }
 
-export interface MenuProps {
-  menu: Category[];
+export interface IMenuProps {
+  menu: ICategory[];
 }
 
 export interface VeganProps {

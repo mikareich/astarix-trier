@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { Category, CosmicImage } from "../interfaces";
+import { ICategory, ICosmicImage } from "../interfaces";
 
 export const drawerState = atom({
   key: "drawerState",
@@ -17,12 +17,12 @@ export const descriptionState = atom({
   default: "",
 });
 
-export const menuState = atom<Category[]>({
+export const menuState = atom<ICategory[]>({
   key: "menuState",
   default: [],
 });
 
-export const heroState = atom<CosmicImage>({
+export const heroState = atom<ICosmicImage>({
   key: "heroState",
   default: undefined,
 });

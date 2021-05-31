@@ -1,12 +1,19 @@
 import React from "react";
 
-import { Product } from "../interfaces";
-import menuStyles from "../styles/Menu.module.scss";
+import { IProduct } from "../interfaces";
+import menuStyles from "../styles/MenuItem.module.scss";
 import Logo from "./Logo";
 
-function MenuItem({ title, price, variants, description, vegan, id }: Product) {
+function MenuItem({
+  title,
+  price,
+  variants,
+  description,
+  vegan,
+  id,
+}: IProduct) {
   return (
-    <div key={id} className={menuStyles.MenuItem}>
+    <div key={id} className={menuStyles.menuItem}>
       <span className={menuStyles.title}>{title}</span>
       {description && (
         <span className={menuStyles.description}>{description}</span>

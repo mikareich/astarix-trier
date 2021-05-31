@@ -1,12 +1,6 @@
 @import "./colors.scss";
 
-.MenuItemList {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.MenuItem {
+.menuItem {
   display: grid;
   grid-template:
     "title vegan space price" auto

@@ -1,6 +1,6 @@
 import Cosmic from "cosmicjs";
 
-import { Category, Product } from "../interfaces";
+import { ICategory, IProduct } from "../interfaces";
 import markdownToHTML from "./markdownToHTML";
 
 export const api = Cosmic();
@@ -49,7 +49,7 @@ export async function getMenu() {
   });
 
   // parse categories
-  const parseProduct = (product): Product => ({
+  const parseProduct = (product): IProduct => ({
     title: product.title,
     vegan: product?.metadata?.vegan || false,
     description: product?.metadata?.description || "",
@@ -58,14 +58,14 @@ export async function getMenu() {
     id: product.id,
   });
 
-  const parseCategory = (category): Category => ({
+  const parseCategory = (category): ICategory => ({
     title: category.title,
     note: category.metadata?.note || "",
     products: category.metadata?.products?.map(parseProduct) || [],
     id: category.id,
   });
 
-  const parsedCategories: Category[] = categories.objects.map(parseCategory);
+  const parsedCategories: ICategory[] = categories.objects.map(parseCategory);
 
   return parsedCategories;
 }

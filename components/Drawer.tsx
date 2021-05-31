@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilState } from "recoil";
 
-import { DrawerProps } from "../interfaces";
+import { IDrawerProps } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
 
-const Drawer: React.FC<DrawerProps> = ({ routes }) => {
+const Drawer: React.FC<IDrawerProps> = ({ routes }) => {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
@@ -32,6 +32,7 @@ const Drawer: React.FC<DrawerProps> = ({ routes }) => {
     <motion.aside
       variants={variants}
       animate={showDrawer ? "visible" : "hidden"}
+      initial="hidden"
       className={drawerStyles.drawerContainer}
     >
       <div className={drawerStyles.drawer}>
