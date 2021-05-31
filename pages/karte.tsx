@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
@@ -6,6 +7,8 @@ import { IMenuProps, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMenu, getPageProps } from "../utils/api";
 import { descriptionState, heroState, titleState } from "../utils/atoms";
+
+const DynamicCategory = dynamic(() => import("../components/Category"));
 
 function Karte({
   title,
@@ -27,7 +30,9 @@ function Karte({
   return (
     <main className={layoutStyles.main}>
       <div dangerouslySetInnerHTML={{ __html: content }} />
-      {menu.map(Category)}
+      {menu.map((category) => (
+        <DynamicCategory {...category} key={category.id} />
+      ))}
     </main>
   );
 }
