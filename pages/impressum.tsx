@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IDescription, IPageProps } from "../interfaces";
+import { IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getPageProps } from "../utils/api";
 import { descriptionState, heroState, titleState } from "../utils/atoms";

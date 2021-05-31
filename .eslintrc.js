@@ -26,4 +26,5 @@ module.exports = {
     camelcase: "off",
     "simple-import-sort/imports": "error",
   },
+  ignorePatterns: ["node_modules/"],
 };
