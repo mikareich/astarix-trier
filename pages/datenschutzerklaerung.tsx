@@ -11,7 +11,7 @@ function Datenschutzerklaerung({
   heroImage,
   content,
   description,
-}: IPageProps & IDescription) {
+}: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);

@@ -36,15 +36,15 @@ function Drawer({ routes }: IDrawerProps) {
       className={drawerStyles.drawerContainer}
     >
       <div className={drawerStyles.drawer}>
-        {routes.map(({ title, pathname }) => {
-          const isActive = router.pathname === pathname;
+        {routes.map(({ title, slug, id }) => {
+          const isActive = router.pathname === slug;
           const className = `
           ${drawerStyles.link} 
           ${isActive ? "active" : "inactive"}
           `;
 
           return (
-            <Link href={pathname} passHref key={pathname}>
+            <Link href={slug} passHref key={id}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className={className} onClick={closeDrawer}>
                 {title}

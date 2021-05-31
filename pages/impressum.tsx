@@ -6,12 +6,7 @@ import layoutStyles from "../styles/Layout.module.scss";
 import { getPageProps } from "../utils/api";
 import { descriptionState, heroState, titleState } from "../utils/atoms";
 
-function Impressum({
-  title,
-  heroImage,
-  content,
-  description,
-}: IPageProps & IDescription) {
+function Impressum({ title, heroImage, content, description }: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);

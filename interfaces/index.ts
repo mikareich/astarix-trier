@@ -1,18 +1,19 @@
 import React from "react";
 
-export type Route = {
+export interface IRoute {
   title: string | React.ReactChild;
-  pathname: string;
+  slug: string;
+  id: string;
   leading?: boolean;
-};
+}
 
 export interface IAppBarProps {
-  routes: Route[];
+  routes: IRoute[];
   position: "top" | "bottom";
 }
 
 export interface IDrawerProps {
-  routes: Route[];
+  routes: IRoute[];
   show?: boolean;
 }
 
@@ -35,7 +36,7 @@ export interface IPageProps {
   title: string;
   heroImage: ICosmicImage;
   content: string;
-  description?: string;
+  description: string;
 }
 
 export interface IAppProps {

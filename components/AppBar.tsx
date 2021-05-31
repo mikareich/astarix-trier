@@ -7,8 +7,6 @@ import { useRecoilState } from "recoil";
 import { IAppBarProps } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
 import { drawerState } from "../utils/atoms";
-import { drawerRoutes } from "../utils/routes";
-import Drawer from "./Drawer";
 
 const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
   const router = useRouter();
@@ -30,8 +28,8 @@ const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
                       }
                       `}
       >
-        {routes.map(({ title, pathname, leading }) => {
-          const isActive = router.pathname === pathname;
+        {routes.map(({ title, slug, leading, id }) => {
+          const isActive = router.pathname === slug;
           const className = `
             ${appBarStyles.link} 
             ${leading ? appBarStyles.leading : "inactive"}
@@ -39,7 +37,7 @@ const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
           `;
 
           return (
-            <Link href={pathname} passHref key={pathname}>
+            <Link href={slug} passHref key={id}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className={className}>
                 {title}

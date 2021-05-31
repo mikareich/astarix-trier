@@ -5,14 +5,22 @@ import Category from "../components/Category";
 import { IMenuProps, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMenu, getPageProps } from "../utils/api";
-import { heroState, titleState } from "../utils/atoms";
+import { descriptionState, heroState, titleState } from "../utils/atoms";
 
-function Karte({ title, heroImage, content, menu }: IPageProps & IMenuProps) {
+function Karte({
+  title,
+  heroImage,
+  content,
+  description,
+  menu,
+}: IPageProps & IMenuProps) {
   const [, setTitle] = useRecoilState(titleState);
+  const [, setDescription] = useRecoilState(descriptionState);
   const [, setHeroImage] = useRecoilState(heroState);
 
   useEffect(() => {
     setTitle(title);
+    setDescription(description);
     setHeroImage(heroImage);
   }, []);
 

@@ -2,6 +2,7 @@ import Cosmic from "cosmicjs";
 
 import { ICategory, IPageProps, IProduct } from "../interfaces";
 import markdownToHTML from "./markdownToHTML";
+import routes from "./routes";
 
 const api = Cosmic();
 
@@ -9,6 +10,15 @@ const bucket = api.bucket({
   slug: process.env.COSMIC_SLUG,
   read_key: process.env.COSMIC_READ_KEY,
 });
+
+export async function getIndexDescription(): Promise<string> {
+  const { id } = routes[0];
+  const props = "metadata.description";
+
+  const data = await bucket.getObject({ id, props });
+
+  return data.object.metadata.description;
+}
 
 export async function getPageProps(pageId: string): Promise<IPageProps> {
   const props = "title,metadata";
@@ -25,7 +35,7 @@ export async function getPageProps(pageId: string): Promise<IPageProps> {
     title,
     heroImage: hero,
     content: await markdownToHTML(content),
-    description,
+    description: description || (await getIndexDescription()),
   };
 }
 
