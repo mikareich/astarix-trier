@@ -42,12 +42,12 @@ export async function getStaticProps() {
 
   const pageProps = await getPageProps(id);
 
-  const menu = await getMenu();
+  // const menu = await getMenu();
 
   return {
     props: {
       ...pageProps,
-      menu,
+      menu: [],
     },
   };
 }
