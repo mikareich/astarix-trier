@@ -26,7 +26,7 @@ class MyDocument extends Document {
           />
           <link
             rel="shortcut icon"
-            href="https://imgix.cosmicjs.com/a8dbc2f0-befd-11eb-8d87-794a0ed68ad6-astarix-kreuz.ico"
+            href="https://assets.ctfassets.net/7hyqdl211gwx/w5PX3REw0YsFSJ2LKCRef/0c10761f195bc42824e20258a6692bab/astarix-x.ico"
             type="image/x-icon"
           />
         </Head>
