@@ -13,6 +13,7 @@ import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
   drawerState,
+  favIconState,
   heroState,
   titleState,
 } from "../utils/atoms";
@@ -28,9 +29,10 @@ function App({ Component, pageProps }: IAppProps) {
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
   const showDrawer = useRecoilValue(drawerState);
+  const favIcon = useRecoilValue(favIconState);
 
   return (
-    <Layout pageTitle={title} metaDescription={description}>
+    <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
       <Drawer routes={drawerRoutes} show={showDrawer} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>

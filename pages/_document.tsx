@@ -24,11 +24,6 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
             rel="stylesheet"
           />
-          <link
-            rel="shortcut icon"
-            href="https://assets.ctfassets.net/7hyqdl211gwx/w5PX3REw0YsFSJ2LKCRef/0c10761f195bc42824e20258a6692bab/astarix-x.ico"
-            type="image/x-icon"
-          />
         </Head>
         <body>
           <Main />

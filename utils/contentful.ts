@@ -2,7 +2,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { Asset, createClient, Entry } from "contentful";
 
-import { IPage, IRoute } from "../interfaces";
+import { IImage, IMetadata, IPage, IRoute } from "../interfaces";
 
 export const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -57,7 +57,35 @@ export async function getPage(slug: string): Promise<IPage> {
 
   const page = parseEntryToPage(data.items[0]);
 
-  console.log(page.heroImage);
-
   return page;
+}
+
+interface AppModel {
+  favIcon: Asset;
+  metaDescription: string;
+}
+
+export async function getMetadata(): Promise<IMetadata> {
+  const data = await client.getEntry<AppModel>("4aS9BmUxul6TfbSHx5qYbf", {
+    content_type: "app",
+    select: "fields.favIcon,fields.metaDescription",
+  });
+
+  const { fields } = data;
+
+  console.log({
+    favIcon: {
+      url: fields.favIcon.fields.file.url,
+      description: fields.favIcon.fields.description,
+    },
+    metaDescription: fields.metaDescription,
+  });
+
+  return {
+    favIcon: {
+      url: fields.favIcon.fields.file.url,
+      description: fields.favIcon.fields.description,
+    },
+    metaDescription: fields.metaDescription,
+  };
 }

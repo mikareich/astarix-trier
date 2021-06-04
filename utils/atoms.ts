@@ -24,3 +24,11 @@ export const heroState = atom<IImage>({
     description: "Links: Ausenbereich des Astarix; Rechts: Todo-Liste",
   },
 });
+
+export const favIconState = atom<IImage>({
+  key: "favIconState",
+  default: {
+    url: "https://assets.ctfassets.net/7hyqdl211gwx/w5PX3REw0YsFSJ2LKCRef/0c10761f195bc42824e20258a6692bab/astarix-x.ico",
+    description: "Astarix X",
+  },
+});

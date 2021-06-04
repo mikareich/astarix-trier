@@ -17,9 +17,9 @@ function Astarix({ color, size }: AstarixLogoProps) {
   const height = width * ratio;
   const sources = {
     red: "https://images.ctfassets.net/7hyqdl211gwx/37z5swgbalZgTlrm4feYtF/8747c027c3523be175bd9a1ad2b2441b/Astarix_Logo_Rot.png",
-    gray: "https://images.ctfassets.net/7hyqdl211gwx/37z5swgbalZgTlrm4feYtF/8747c027c3523be175bd9a1ad2b2441b/Astarix_Logo_Grau.png",
+    gray: "https://images.ctfassets.net/7hyqdl211gwx/7KwzIdPaHuSJN8bIqtiS6U/3f769178d85bf13bde165fb1610a9eb1/e717c710-b56d-11eb-b5b6-fd115d17c053-Astarix-Logo-Grau.png",
     black:
-      "https://images.ctfassets.net/7hyqdl211gwx/37z5swgbalZgTlrm4feYtF/8747c027c3523be175bd9a1ad2b2441b/Astarix_Logo_Schwarz.png",
+      "https://images.ctfassets.net/7hyqdl211gwx/4wFrxC47pXepek6p6Mh3F2/14b4d8db660ba575208f7b3ac65f90d6/e6fb6570-b56d-11eb-b5b6-fd115d17c053-Astarix-Logo-Black.png",
   };
 
   const src = sources[color];

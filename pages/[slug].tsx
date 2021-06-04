@@ -7,19 +7,32 @@ import {
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IPage } from "../interfaces";
+import { IMetadata, IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { descriptionState, heroState, titleState } from "../utils/atoms";
-import { client, getPage } from "../utils/contentful";
+import {
+  descriptionState,
+  favIconState,
+  heroState,
+  titleState,
+} from "../utils/atoms";
+import { client, getMetadata, getPage } from "../utils/contentful";
 
-function Index({ title, heroImage, content, description }) {
+function Page({
+  title,
+  heroImage,
+  content,
+  metaDescription,
+  favIcon,
+}: IPage & IMetadata) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
+  const [, setFavIcon] = useRecoilState(favIconState);
   const [, setHeroImage] = useRecoilState(heroState);
 
   useEffect(() => {
-    setTitle(title);
-    setDescription(description);
+    setTitle(`Astarix Trier | ${title}`);
+    setDescription(metaDescription);
+    setFavIcon(favIcon);
     setHeroImage(heroImage);
   }, []);
 
@@ -56,14 +69,15 @@ export async function getStaticPaths(): Promise<
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPage>> {
+): Promise<GetStaticPropsResult<IPage & IMetadata>> {
   const { slug } = ctx.params;
 
-  const props = await getPage(slug);
+  const pageProps = await getPage(slug);
+  const metadata = await getMetadata();
 
   return {
-    props,
+    props: { ...pageProps, ...metadata },
   };
 }
 
-export default Index;
+export default Page;

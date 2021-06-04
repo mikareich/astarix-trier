@@ -19,7 +19,7 @@ export interface IPage {
   slug: string;
   title: string;
   heroImage: IImage;
-  content: React.ReactNode;
+  content: string;
   id: string;
 }
 
@@ -41,4 +41,9 @@ export interface ICategory {
 
 export interface IMenuProps {
   menu: ICategory[];
+}
+
+export interface IMetadata {
+  favIcon: IImage;
+  metaDescription: string;
 }
