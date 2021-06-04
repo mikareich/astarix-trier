@@ -31,35 +31,8 @@ function Index({ title, heroImage, content, description }) {
   );
 }
 
-type PathParams = { slug: string };
-
-export async function getStaticPaths(): Promise<
-  GetStaticPathsResult<PathParams>
-> {
-  const contentfulItems = await client.getEntries<IPage>({
-    content_type: "page",
-    // skip homepage
-    "fields.slug[ne]": "home",
-  });
-
-  const staticPaths = contentfulItems.items.map((data) => ({
-    params: {
-      slug: data.fields.slug,
-    },
-  }));
-
-  return {
-    paths: staticPaths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps(
-  ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPage>> {
-  const { slug } = ctx.params;
-
-  const props = await getPage(slug);
+export async function getStaticProps(): Promise<GetStaticPropsResult<IPage>> {
+  const props = await getPage("home");
 
   return {
     props,
