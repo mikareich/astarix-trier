@@ -4,9 +4,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilState } from "recoil";
 
-import { IDrawerProps } from "../interfaces";
+import { IRoute } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
+
+export interface IDrawerProps {
+  routes: IRoute[];
+  show?: boolean;
+}
 
 function Drawer({ routes }: IDrawerProps) {
   const router = useRouter();
@@ -36,15 +41,15 @@ function Drawer({ routes }: IDrawerProps) {
       className={drawerStyles.drawerContainer}
     >
       <div className={drawerStyles.drawer}>
-        {routes.map(({ title, slug, id }) => {
-          const isActive = router.pathname === slug;
+        {routes.map(({ title, slug }) => {
+          const isActive = router.pathname === `/${slug}`;
           const className = `
           ${drawerStyles.link} 
           ${isActive ? "active" : "inactive"}
           `;
 
           return (
-            <Link href={slug} passHref key={id}>
+            <Link href={`/${slug}`} passHref key={slug}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#" className={className} onClick={closeDrawer}>
                 {title}

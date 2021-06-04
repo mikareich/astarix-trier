@@ -5,28 +5,23 @@ import { IRoute } from "../interfaces";
 
 const routes: IRoute[] = [
   {
-    id: "60af8252312d790009aaabb7",
-    slug: "/",
+    slug: "home",
     title: <Logo.Astarix color="red" />,
   },
   {
-    id: "60b379c1f6a02000084be7b7",
-    slug: "/karte",
-    title: "Karte",
+    slug: "speisekarte",
+    title: "Speisekarte",
   },
   {
-    id: "60b3906a5800ef0008470001",
-    slug: "/komm-zu-uns",
+    slug: "komm-zu-uns",
     title: "Komm zu uns",
   },
   {
-    id: "60b390cab11c22000757f6b8",
-    slug: "/impressum",
+    slug: "impressum",
     title: "Impressum",
   },
   {
-    id: "60b391002544e00008dca204",
-    slug: "/datenschutzerklaerung",
+    slug: "datenschutzerklaerung",
     title: "Datenschutzerklärung",
   },
 ];

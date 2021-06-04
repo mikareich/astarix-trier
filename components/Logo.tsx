@@ -1,7 +1,14 @@
 import Image from "next/image";
 import React from "react";
 
-import { AstarixLogoProps, VeganProps } from "../interfaces";
+export interface VeganProps {
+  size?: number;
+}
+
+export interface AstarixLogoProps {
+  color: "red" | "gray" | "black";
+  size?: number;
+}
 
 function Astarix({ color, size }: AstarixLogoProps) {
   const ratio = 31 / 100;

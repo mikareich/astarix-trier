@@ -1,7 +1,11 @@
 import Head from "next/head";
 import React from "react";
 
-import { ILayoutProps } from "../interfaces";
+export interface ILayoutProps {
+  pageTitle: string;
+  metaDescription?: string;
+  children: React.ReactNode;
+}
 
 function Layout({ pageTitle, metaDescription, children }: ILayoutProps) {
   return (
