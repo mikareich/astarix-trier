@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { ICategory, ICosmicImage, IImage } from "../interfaces";
+import { IImage } from "../interfaces";
 
 export const drawerState = atom({
   key: "drawerState",
