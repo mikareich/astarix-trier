@@ -5,7 +5,7 @@ import { IRoute } from "../interfaces";
 
 const routes: IRoute[] = [
   {
-    slug: "home",
+    slug: "",
     title: <Logo.Astarix color="red" />,
   },
   {
