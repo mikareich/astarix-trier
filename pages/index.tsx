@@ -1,13 +1,8 @@
-import {
-  GetServerSidePropsResult,
-  GetStaticPathsResult,
-  GetStaticPropsContext,
-  GetStaticPropsResult,
-} from "next";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IMenuProps, IMetadata, IPage } from "../interfaces";
+import { IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -15,7 +10,7 @@ import {
   heroState,
   titleState,
 } from "../utils/atoms";
-import { getMenu, getMetadata, getPage } from "../utils/contentful";
+import { getMetadata, getPage } from "../utils/contentful";
 
 function Index({
   title,
@@ -23,7 +18,8 @@ function Index({
   content,
   metaDescription,
   favIcon,
-}: IPage & IMetadata) {
+  preview,
+}: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -37,21 +33,28 @@ function Index({
   }, []);
 
   return (
-    <main
-      className={layoutStyles.main}
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+    <>
+      {preview && (
+        <a href="/api/clear-preview">
+          You are in preview-mode. Click to exit preview
+        </a>
+      )}
+      <main
+        className={layoutStyles.main}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    </>
   );
 }
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext
-): Promise<GetStaticPropsResult<IPage & IMetadata>> {
+): Promise<GetStaticPropsResult<IPageProps>> {
   const pageProps = await getPage("home", ctx.preview);
   const metadata = await getMetadata();
 
   return {
-    props: { ...pageProps, ...metadata },
+    props: { ...pageProps, ...metadata, preview: ctx.preview || false },
   };
 }
 

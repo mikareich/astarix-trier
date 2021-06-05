@@ -23,6 +23,11 @@ export interface IPage {
   id: string;
 }
 
+export interface IPageProps extends IPage, IMetadata {
+  preview: boolean;
+  menu?: ICategory[];
+}
+
 export interface IProduct {
   title: string;
   vegan: boolean;
@@ -37,10 +42,6 @@ export interface ICategory {
   note: string;
   products: IProduct[];
   id: string;
-}
-
-export interface IMenuProps {
-  menu: ICategory[];
 }
 
 export interface IMetadata {
