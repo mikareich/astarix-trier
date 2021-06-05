@@ -12,10 +12,18 @@ import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
   favIconState,
+  footbarRoutesState,
   heroState,
+  navbarRoutesState,
   titleState,
 } from "../utils/atoms";
-import { client, getMenu, getMetadata, getPage } from "../utils/contentful";
+import {
+  client,
+  getAllPageRoutes,
+  getMenu,
+  getMetadata,
+  getPage,
+} from "../utils/contentful";
 
 function Page({
   title,
@@ -26,17 +34,23 @@ function Page({
   favIcon,
   menu,
   preview,
+  navbarRoutes,
+  footbarRoutes,
 }: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
   const [, setHeroImage] = useRecoilState(heroState);
+  const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
+  const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
 
   useEffect(() => {
     setTitle(`Astarix Trier | ${title}`);
     setDescription(metaDescription);
     setFavIcon(favIcon);
     setHeroImage(heroImage);
+    setNavbarRoutes(navbarRoutes);
+    setFootbarRoutes(footbarRoutes);
   }, []);
 
   return (
@@ -59,17 +73,11 @@ type PathParams = { slug: string };
 export async function getStaticPaths(): Promise<
   GetStaticPathsResult<PathParams>
 > {
-  const contentfulItems = await client.getEntries<IPage>({
-    content_type: "page",
-    // skip homepage
-    "fields.slug[ne]": "home",
-  });
+  const routes = await getAllPageRoutes();
 
-  const staticPaths = contentfulItems.items.map((data) => ({
-    params: {
-      slug: data.fields.slug,
-    },
-  }));
+  const staticPaths = routes
+    .map(({ slug }) => slug !== "" && { params: { slug } })
+    .filter((n) => n);
 
   return {
     paths: staticPaths,
@@ -87,7 +95,12 @@ export async function getStaticProps(
   const menu = await getMenu();
 
   return {
-    props: { ...pageProps, ...metadata, menu, preview: ctx.preview || false },
+    props: {
+      ...pageProps,
+      ...metadata,
+      menu,
+      preview: ctx.preview || false,
+    },
   };
 }
 

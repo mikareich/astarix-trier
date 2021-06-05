@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface IRoute {
+  id: string;
   title: string | React.ReactChild;
   slug: string;
   leading?: boolean;
@@ -47,4 +48,6 @@ export interface ICategory {
 export interface IMetadata {
   favIcon: IImage;
   metaDescription: string;
+  navbarRoutes: IRoute[];
+  footbarRoutes: IRoute[];
 }

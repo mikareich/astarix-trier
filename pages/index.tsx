@@ -7,7 +7,9 @@ import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
   favIconState,
+  footbarRoutesState,
   heroState,
+  navbarRoutesState,
   titleState,
 } from "../utils/atoms";
 import { getMetadata, getPage } from "../utils/contentful";
@@ -19,17 +21,23 @@ function Index({
   metaDescription,
   favIcon,
   preview,
+  navbarRoutes,
+  footbarRoutes,
 }: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
   const [, setHeroImage] = useRecoilState(heroState);
+  const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
+  const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
 
   useEffect(() => {
     setTitle(`Astarix Trier | ${title}`);
     setDescription(metaDescription);
     setFavIcon(favIcon);
     setHeroImage(heroImage);
+    setNavbarRoutes(navbarRoutes);
+    setFootbarRoutes(footbarRoutes);
   }, []);
 
   return (
@@ -54,7 +62,11 @@ export async function getStaticProps(
   const metadata = await getMetadata();
 
   return {
-    props: { ...pageProps, ...metadata, preview: ctx.preview || false },
+    props: {
+      ...pageProps,
+      ...metadata,
+      preview: ctx.preview || false,
+    },
   };
 }
 

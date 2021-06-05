@@ -72,6 +72,13 @@ li::marker {
   background-color: transparentize($color: $red, $amount: 0.7);
 }
 
+img {
+  width: 100%;
+  object-fit: cover;
+  max-height: 500px;
+  margin: 20px 0px;
+}
+
 @media (max-width: 568px) {
   h1 {
     font-size: 2.074rem;
@@ -87,5 +94,9 @@ li::marker {
 
   h4 {
     font-size: 1.2rem;
+  }
+
+  img {
+    max-height: 300px;
   }
 }
