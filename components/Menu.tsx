@@ -1,13 +1,13 @@
 import React from "react";
 
-import { ICategory } from "../interfaces";
+import { Category as CategoryProps } from "../interfaces";
 import Category from "./Category";
 
-interface IMenuProps {
-  menu: ICategory[];
+interface MenuProps {
+  menu: CategoryProps[];
 }
 
-function Menu({ menu }: IMenuProps) {
+function Menu({ menu }: MenuProps) {
   return (
     <div>
       <b>Übersicht</b>

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React from "react";
 
-export interface VeganProps {
+interface VeganProps {
   size?: number;
 }
 
-export interface AstarixLogoProps {
+interface AstarixLogoProps {
   color: "red" | "gray" | "black";
   size?: number;
 }

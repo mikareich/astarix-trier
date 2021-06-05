@@ -2,18 +2,18 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { MdMenu } from "react-icons/md";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
-import { IRoute } from "../interfaces";
+import { Route } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
 import { drawerState } from "../utils/atoms";
 
-export interface IAppBarProps {
-  routes: IRoute[];
+interface AppProps {
+  routes: Route[];
   position: "top" | "bottom";
 }
 
-const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
+const AppBar: React.FC<AppProps> = ({ routes, position }) => {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
@@ -24,14 +24,12 @@ const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
     <>
       {position === "top" && <div className={appBarStyles.layer} />}
       <nav
-        className={`
-                      ${appBarStyles.appBar}
-                      ${
-                        position === "top"
-                          ? appBarStyles.top
-                          : appBarStyles.bottom
-                      }
-                      `}
+        className={`${appBarStyles.appBar}
+                    ${
+                      position === "top"
+                        ? appBarStyles.top
+                        : appBarStyles.bottom
+                    }`}
       >
         {routes.map(({ title, slug, leading }) => {
           const isActive = router.asPath === `/${slug}`;

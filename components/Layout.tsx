@@ -1,12 +1,12 @@
 import Head from "next/head";
 import React from "react";
 
-import { IImage } from "../interfaces";
+import { Image } from "../interfaces";
 
-export interface ILayoutProps {
+interface LayoutProps {
   pageTitle: string;
   metaDescription: string;
-  favIcon: IImage;
+  favIcon: Image;
   children: React.ReactNode;
 }
 
@@ -15,7 +15,7 @@ function Layout({
   metaDescription,
   favIcon,
   children,
-}: ILayoutProps) {
+}: LayoutProps) {
   return (
     <>
       <Head>

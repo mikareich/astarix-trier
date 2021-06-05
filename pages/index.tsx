@@ -2,7 +2,7 @@ import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IPageProps } from "../interfaces";
+import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -23,7 +23,7 @@ function Index({
   preview,
   navbarRoutes,
   footbarRoutes,
-}: IPageProps) {
+}: PageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -57,7 +57,7 @@ function Index({
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext
-): Promise<GetStaticPropsResult<IPageProps>> {
+): Promise<GetStaticPropsResult<PageProps>> {
   const pageProps = await getPage("home", ctx.preview);
   const metadata = await getMetadata();
 

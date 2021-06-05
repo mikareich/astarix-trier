@@ -1,10 +1,17 @@
 import React from "react";
 
-import { IProduct } from "../interfaces";
+import { Product as ProductProps } from "../interfaces";
 import productStyles from "../styles/Product.module.scss";
 import Logo from "./Logo";
 
-function Product({ title, price, variants, description, vegan, id }: IProduct) {
+function Product({
+  title,
+  price,
+  variants,
+  description,
+  vegan,
+  id,
+}: ProductProps) {
   return (
     <div key={id} className={productStyles.product}>
       <span className={productStyles.title}>{title}</span>

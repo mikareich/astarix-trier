@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import Menu from "../components/Menu";
-import { IPage, IPageProps } from "../interfaces";
+import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -18,7 +18,6 @@ import {
   titleState,
 } from "../utils/atoms";
 import {
-  client,
   getAllPageRoutes,
   getMenu,
   getMetadata,
@@ -36,7 +35,7 @@ function Page({
   preview,
   navbarRoutes,
   footbarRoutes,
-}: IPageProps) {
+}: PageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -68,7 +67,9 @@ function Page({
   );
 }
 
-type PathParams = { slug: string };
+interface PathParams {
+  [slug: string]: string;
+}
 
 export async function getStaticPaths(): Promise<
   GetStaticPathsResult<PathParams>
@@ -87,7 +88,7 @@ export async function getStaticPaths(): Promise<
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPageProps>> {
+): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
   const pageProps = await getPage(slug, ctx.preview);

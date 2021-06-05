@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ICategory } from "../interfaces";
+import { Category as CategoryProps } from "../interfaces";
 import categoryStyles from "../styles/Category.module.scss";
 import Product from "./Product";
 
-function Category({ title, products, note, id }: ICategory) {
+function Category({ title, products, note, id }: CategoryProps) {
   return (
     <section className={categoryStyles.category} id={id}>
       <h3 id={title}>{title}</h3>
