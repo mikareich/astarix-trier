@@ -3,57 +3,31 @@ import React from "react";
 export interface IRoute {
   title: string | React.ReactChild;
   slug: string;
-  id: string;
   leading?: boolean;
 }
 
-export interface IAppBarProps {
-  routes: IRoute[];
-  position: "top" | "bottom";
-}
-
-export interface IDrawerProps {
-  routes: IRoute[];
-  show?: boolean;
-}
-
-export interface ILayoutProps {
-  pageTitle: string;
-  metaDescription?: string;
-  children: React.ReactNode;
-}
-
-export interface ICosmicImage {
+export interface IImage {
   url: string;
-  imgix_url: string;
+  description: string;
 }
 
 export interface IDescription {
   description: string;
 }
 
-export interface IPageProps {
+export interface IPage {
+  slug: string;
   title: string;
-  heroImage: ICosmicImage;
+  heroImage: IImage;
   content: string;
-  description: string;
-}
-
-export interface IAppProps {
-  Component: React.ComponentClass;
-  pageProps: IPageProps;
-}
-
-export interface IHeroImageProps {
-  src: string;
-  alt: string;
+  id: string;
 }
 
 export interface IProduct {
   title: string;
   vegan: boolean;
   description: string;
-  variants: Array<{ variant: string }>;
+  variants: { variant: string; price: string | undefined; id: string }[];
   price: number;
   id: string;
 }
@@ -69,11 +43,7 @@ export interface IMenuProps {
   menu: ICategory[];
 }
 
-export interface VeganProps {
-  size?: number;
-}
-
-export interface AstarixLogoProps {
-  color: "red" | "gray" | "black";
-  size?: number;
+export interface IMetadata {
+  favIcon: IImage;
+  metaDescription: string;
 }

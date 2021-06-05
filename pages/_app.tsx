@@ -8,36 +8,37 @@ import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
 import HeroImage from "../components/HeroImage";
 import Layout from "../components/Layout";
-import { IAppProps } from "../interfaces";
+import { IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
   drawerState,
+  favIconState,
   heroState,
   titleState,
 } from "../utils/atoms";
 import { drawerRoutes, footerRoutes, navBarRoutes } from "../utils/routes";
+
+export interface IAppProps {
+  Component: React.ComponentClass;
+  pageProps: IPage;
+}
 
 function App({ Component, pageProps }: IAppProps) {
   const heroImage = useRecoilValue(heroState);
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
   const showDrawer = useRecoilValue(drawerState);
+  const favIcon = useRecoilValue(favIconState);
 
   return (
-    <Layout pageTitle={title} metaDescription={description}>
+    <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
       <Drawer routes={drawerRoutes} show={showDrawer} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
           <AppBar routes={navBarRoutes} position="top" />
         </header>
-        <HeroImage
-          src={
-            heroImage?.imgix_url ||
-            "https://imgix.cosmicjs.com/1ca816a0-b56e-11eb-b5b6-fd115d17c053-image-3.png"
-          }
-          alt="Bild vom Astarix"
-        />
+        <HeroImage src={heroImage.url} description={heroImage.description} />
         <Component {...pageProps} />
         <footer className={layoutStyles.footer}>
           <AppBar routes={footerRoutes} position="bottom" />

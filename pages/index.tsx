@@ -1,19 +1,38 @@
+import {
+  GetServerSidePropsResult,
+  GetStaticPathsResult,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from "next";
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IPageProps } from "../interfaces";
+import { IMenuProps, IMetadata, IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { getPageProps } from "../utils/api";
-import { descriptionState, heroState, titleState } from "../utils/atoms";
+import {
+  descriptionState,
+  favIconState,
+  heroState,
+  titleState,
+} from "../utils/atoms";
+import { getMenu, getMetadata, getPage } from "../utils/contentful";
 
-function Index({ title, heroImage, content, description }: IPageProps) {
+function Index({
+  title,
+  heroImage,
+  content,
+  metaDescription,
+  favIcon,
+}: IPage & IMetadata) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
+  const [, setFavIcon] = useRecoilState(favIconState);
   const [, setHeroImage] = useRecoilState(heroState);
 
   useEffect(() => {
-    setTitle(title);
-    setDescription(description);
+    setTitle(`Astarix Trier | ${title}`);
+    setDescription(metaDescription);
+    setFavIcon(favIcon);
     setHeroImage(heroImage);
   }, []);
 
@@ -25,13 +44,14 @@ function Index({ title, heroImage, content, description }: IPageProps) {
   );
 }
 
-export async function getStaticProps() {
-  const id = "60af8252312d790009aaabb7";
-
-  const props = await getPageProps(id);
+export async function getStaticProps(
+  ctx: GetStaticPropsContext
+): Promise<GetStaticPropsResult<IPage & IMetadata>> {
+  const pageProps = await getPage("home", ctx.preview);
+  const metadata = await getMetadata();
 
   return {
-    props,
+    props: { ...pageProps, ...metadata },
   };
 }
 
