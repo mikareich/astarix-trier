@@ -1,35 +1,38 @@
 import React from "react";
 
-export interface IRoute {
+export interface Route {
   id: string;
   title: string | React.ReactChild;
   slug: string;
   leading?: boolean;
 }
 
-export interface IImage {
+export interface Image {
   url: string;
   description: string;
 }
 
-export interface IDescription {
-  description: string;
-}
-
-export interface IPage {
+export interface Page {
   slug: string;
   title: string;
-  heroImage: IImage;
+  heroImage: Image;
   content: string;
   id: string;
 }
 
-export interface IPageProps extends IPage, IMetadata {
-  preview: boolean;
-  menu?: ICategory[];
+export interface Metadata {
+  favIcon: Image;
+  metaDescription: string;
+  navbarRoutes: Route[];
+  footbarRoutes: Route[];
 }
 
-export interface IProduct {
+export interface PageProps extends Page, Metadata {
+  preview: boolean;
+  menu?: Category[];
+}
+
+export interface Product {
   title: string;
   vegan: boolean;
   description: string;
@@ -38,16 +41,9 @@ export interface IProduct {
   id: string;
 }
 
-export interface ICategory {
+export interface Category {
   title: string;
   note: string;
-  products: IProduct[];
+  products: Product[];
   id: string;
-}
-
-export interface IMetadata {
-  favIcon: IImage;
-  metaDescription: string;
-  navbarRoutes: IRoute[];
-  footbarRoutes: IRoute[];
 }

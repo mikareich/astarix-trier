@@ -2,7 +2,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { Document } from "@contentful/rich-text-types";
 import { Entry } from "contentful";
 
-import { ICategory, IProduct } from "../../interfaces";
+import { Category, Product } from "../../interfaces";
 import { client } from "./clients";
 
 interface CollectionModel {
@@ -19,7 +19,7 @@ interface ProductModel {
   price: number;
 }
 
-function parseCategory(categoryEntry: Entry<CollectionModel>): ICategory {
+function parseCategory(categoryEntry: Entry<CollectionModel>): Category {
   const { fields, sys } = categoryEntry;
 
   return {
@@ -30,7 +30,7 @@ function parseCategory(categoryEntry: Entry<CollectionModel>): ICategory {
   };
 }
 
-function parseProduct(productEntry: Entry<ProductModel>): IProduct {
+function parseProduct(productEntry: Entry<ProductModel>): Product {
   const { fields, sys } = productEntry;
 
   return {
@@ -48,13 +48,13 @@ function parseProduct(productEntry: Entry<ProductModel>): IProduct {
   };
 }
 
-export default async function getMenu(): Promise<ICategory[]> {
+export default async function getMenu(): Promise<Category[]> {
   const data = await client.getEntries<CollectionModel>({
     content_type: "collection",
     order: "sys.createdAt",
   });
 
-  const menu: ICategory[] = data.items.map(parseCategory);
+  const menu: Category[] = data.items.map(parseCategory);
 
   return menu;
 }

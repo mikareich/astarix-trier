@@ -4,16 +4,15 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilState } from "recoil";
 
-import { IRoute } from "../interfaces";
+import { Route } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
 
-export interface IDrawerProps {
-  routes: IRoute[];
-  show?: boolean;
+interface DrawerProps {
+  routes: Route[];
 }
 
-function Drawer({ routes }: IDrawerProps) {
+function Drawer({ routes }: DrawerProps) {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);

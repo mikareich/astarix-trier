@@ -4,16 +4,16 @@ import React from "react";
 import { MdMenu } from "react-icons/md";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import { IRoute } from "../interfaces";
+import { Route } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
 import { drawerState } from "../utils/atoms";
 
-export interface IAppBarProps {
-  routes: IRoute[];
+interface AppProps {
+  routes: Route[];
   position: "top" | "bottom";
 }
 
-const AppBar: React.FC<IAppBarProps> = ({ routes, position }) => {
+const AppBar: React.FC<AppProps> = ({ routes, position }) => {
   const router = useRouter();
 
   const [showDrawer, setDrawer] = useRecoilState(drawerState);

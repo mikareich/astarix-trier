@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import Menu from "../components/Menu";
-import { IPage, IPageProps } from "../interfaces";
+import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -35,7 +35,7 @@ function Page({
   preview,
   navbarRoutes,
   footbarRoutes,
-}: IPageProps) {
+}: PageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -88,7 +88,7 @@ export async function getStaticPaths(): Promise<
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPageProps>> {
+): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
   const pageProps = await getPage(slug, ctx.preview);

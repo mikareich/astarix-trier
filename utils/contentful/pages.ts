@@ -2,7 +2,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, Entry } from "contentful";
 
-import { IMetadata, IPage, IRoute } from "../../interfaces";
+import { Metadata, Page, Route } from "../../interfaces";
 import { client, previewClient } from "./clients";
 
 interface PageModel {
@@ -12,11 +12,11 @@ interface PageModel {
   content: Document;
 }
 
-function parseEntryToPage(entry: Entry<PageModel>): IPage {
+function parseEntryToPage(entry: Entry<PageModel>): Page {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
-  const page: IPage = {
+  const page: Page = {
     id,
     slug,
     title,
@@ -45,7 +45,7 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
   return page;
 }
 
-export async function getPage(slug: string, preview = false): Promise<IPage> {
+export async function getPage(slug: string, preview = false): Promise<Page> {
   const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,
@@ -64,7 +64,7 @@ interface AppModel {
   footbar: Entry<PageModel>[];
 }
 
-function parsePageToRoute({ slug, title, id }: IPage): IRoute {
+function parsePageToRoute({ slug, title, id }: Page): Route {
   return {
     slug: slug === "home" ? "" : slug,
     title,
@@ -73,7 +73,7 @@ function parsePageToRoute({ slug, title, id }: IPage): IRoute {
   };
 }
 
-export async function getMetadata(): Promise<IMetadata> {
+export async function getMetadata(): Promise<Metadata> {
   const data = await client.getEntry<AppModel>("4aS9BmUxul6TfbSHx5qYbf", {
     content_type: "app",
     select: "fields",
@@ -92,12 +92,12 @@ export async function getMetadata(): Promise<IMetadata> {
   };
 }
 
-export async function getAllPageRoutes(): Promise<IRoute[]> {
+export async function getAllPageRoutes(): Promise<Route[]> {
   const data = await client.getEntries<PageModel>({
     content_type: "page",
   });
 
-  const routes: IRoute[] = data.items
+  const routes: Route[] = data.items
     .map(parseEntryToPage)
     .map(parsePageToRoute);
 

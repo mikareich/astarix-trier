@@ -9,7 +9,7 @@ import Drawer from "../components/Drawer";
 import HeroImage from "../components/HeroImage";
 import Layout from "../components/Layout";
 import Logo from "../components/Logo";
-import { IPage, IRoute } from "../interfaces";
+import { Page, Route } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -23,7 +23,7 @@ import {
 
 export interface IAppProps {
   Component: React.ComponentClass;
-  pageProps: IPage;
+  pageProps: Page;
 }
 
 function App({ Component, pageProps }: IAppProps) {
@@ -35,7 +35,7 @@ function App({ Component, pageProps }: IAppProps) {
 
   // format routes
 
-  const leadingRouteAsImage = (route: IRoute, navbar): IRoute => ({
+  const leadingRouteAsImage = (route: Route, navbar): Route => ({
     ...route,
     title:
       (route.leading &&
@@ -47,7 +47,7 @@ function App({ Component, pageProps }: IAppProps) {
       route.title,
   });
 
-  const isNotLeadingFromFootbar = (route: IRoute) =>
+  const isNotLeadingFromFootbar = (route: Route) =>
     !(route.leading && footbarRoutes.includes(route));
 
   const navbarRoutes = useRecoilValue(navbarRoutesState).map((route) =>
