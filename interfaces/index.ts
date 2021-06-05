@@ -15,12 +15,13 @@ export interface IDescription {
   description: string;
 }
 
-export interface IPage {
+export interface IPageProps {
   slug: string;
   title: string;
   heroImage: IImage;
   content: string;
   id: string;
+  preview: boolean;
 }
 
 export interface IProduct {

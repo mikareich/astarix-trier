@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import Menu from "../components/Menu";
-import { IMenuProps, IMetadata, IPage } from "../interfaces";
+import { IMenuProps, IMetadata, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -27,7 +27,8 @@ function Page({
   slug,
   favIcon,
   menu,
-}: IPage & IMetadata & IMenuProps) {
+  preview,
+}: IPageProps & IMetadata & IMenuProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -41,11 +42,17 @@ function Page({
   }, []);
 
   return (
-    <main className={layoutStyles.main}>
-      {" "}
-      <div dangerouslySetInnerHTML={{ __html: content }} />
-      {slug === "speisekarte" && <Menu menu={menu} />}
-    </main>
+    <>
+      {preview && (
+        <a href="/api/clear-preview">
+          You are in preview-mode. Click to exit preview
+        </a>
+      )}
+      <main className={layoutStyles.main}>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+        {slug === "speisekarte" && <Menu menu={menu} />}
+      </main>
+    </>
   );
 }
 
@@ -54,7 +61,7 @@ type PathParams = { slug: string };
 export async function getStaticPaths(
   ctx: GetStaticPathsContext
 ): Promise<GetStaticPathsResult<PathParams>> {
-  const contentfulItems = await client.getEntries<IPage>({
+  const contentfulItems = await client.getEntries<IPageProps>({
     content_type: "page",
     // skip homepage
     "fields.slug[ne]": "home",
@@ -74,7 +81,7 @@ export async function getStaticPaths(
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPage & IMetadata & IMenuProps>> {
+): Promise<GetStaticPropsResult<IPageProps & IMetadata & IMenuProps>> {
   const { slug } = ctx.params;
 
   const pageProps = await getPage(slug, ctx.preview);
@@ -82,7 +89,7 @@ export async function getStaticProps(
   const menu = await getMenu();
 
   return {
-    props: { ...pageProps, ...metadata, menu },
+    props: { ...pageProps, ...metadata, menu, preview: ctx.preview || false },
   };
 }
 

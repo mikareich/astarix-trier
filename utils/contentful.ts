@@ -7,7 +7,7 @@ import {
   IImage,
   IMenuProps,
   IMetadata,
-  IPage,
+  IPageProps,
   IProduct,
   IRoute,
 } from "../interfaces";
@@ -30,11 +30,11 @@ interface PageModel {
   content: Document;
 }
 
-function parseEntryToPage(entry: Entry<PageModel>): IPage {
+function parseEntryToPage(entry: Entry<PageModel>): IPageProps {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
-  const page: IPage = {
+  const page: IPageProps = {
     id,
     slug,
     title,
@@ -57,7 +57,10 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
   return page;
 }
 
-export async function getPage(slug: string, preview = false): Promise<IPage> {
+export async function getPage(
+  slug: string,
+  preview = false
+): Promise<IPageProps> {
   const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,
