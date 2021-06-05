@@ -1,19 +1,9 @@
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { Block, BLOCKS, Document } from "@contentful/rich-text-types";
-import { Asset, createClient, Entry } from "contentful";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { Asset, Entry } from "contentful";
 
-import { ICategory, IMetadata, IPage, IProduct, IRoute } from "../interfaces";
-
-export const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CDA_ACCESS_TOKEN,
-});
-
-export const previewClient = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CPA_ACCESS_TOKEN,
-  host: "preview.contentful.com",
-});
+import { IMetadata, IPage, IRoute } from "../../interfaces";
+import { client, previewClient } from "./clients";
 
 interface PageModel {
   slug: string;
@@ -112,58 +102,4 @@ export async function getAllPageRoutes(): Promise<IRoute[]> {
     .map(parsePageToRoute);
 
   return routes;
-}
-
-interface CollectionModel {
-  title: string;
-  note: Document;
-  products: Entry<ProductModel>[];
-}
-
-interface ProductModel {
-  title: string;
-  description: Document;
-  vegan: boolean;
-  variants: { id: string; key: string; value: string }[];
-  price: number;
-}
-
-function parseCategory(categoryEntry: Entry<CollectionModel>): ICategory {
-  const { fields, sys } = categoryEntry;
-
-  return {
-    id: sys.id,
-    title: fields.title,
-    note: documentToHtmlString(fields?.note),
-    products: fields.products.map(parseProduct),
-  };
-}
-
-function parseProduct(productEntry: Entry<ProductModel>): IProduct {
-  const { fields, sys } = productEntry;
-
-  return {
-    id: sys.id,
-    title: fields.title,
-    description: documentToHtmlString(fields?.description),
-    price: fields.price,
-    vegan: fields.vegan,
-    variants:
-      fields?.variants?.map(({ key, value, id }) => ({
-        variant: key,
-        id,
-        price: value,
-      })) || [],
-  };
-}
-
-export async function getMenu(): Promise<ICategory[]> {
-  const data = await client.getEntries<CollectionModel>({
-    content_type: "collection",
-    order: "sys.createdAt",
-  });
-
-  const menu: ICategory[] = data.items.map(parseCategory);
-
-  return menu;
 }

@@ -18,7 +18,6 @@ import {
   titleState,
 } from "../utils/atoms";
 import {
-  client,
   getAllPageRoutes,
   getMenu,
   getMetadata,
@@ -68,7 +67,9 @@ function Page({
   );
 }
 
-type PathParams = { slug: string };
+interface PathParams {
+  [slug: string]: string;
+}
 
 export async function getStaticPaths(): Promise<
   GetStaticPathsResult<PathParams>
