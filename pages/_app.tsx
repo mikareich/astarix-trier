@@ -18,14 +18,14 @@ import {
   heroState,
   navbarRoutesState,
   titleState,
-} from "../utils/recoil/atoms";
+} from "../utils/recoil";
 
-export interface IAppProps {
+export interface AppProps {
   Component: React.ComponentClass;
   pageProps: Page;
 }
 
-function App({ Component, pageProps }: IAppProps) {
+function App({ Component, pageProps }: AppProps) {
   const heroImage = useRecoilValue(heroState);
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
@@ -75,7 +75,7 @@ function App({ Component, pageProps }: IAppProps) {
   );
 }
 
-function AppContainer({ Component, pageProps }: IAppProps) {
+function AppContainer({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ParallaxProvider scrollAxis="vertical">

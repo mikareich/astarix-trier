@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 
 import { Route } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
-import { drawerState } from "../utils/recoil/atoms";
+import { drawerState } from "../utils/recoil";
 
 interface AppProps {
   routes: Route[];
