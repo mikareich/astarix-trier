@@ -2,14 +2,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, createClient, Entry } from "contentful";
 
-import {
-  ICategory,
-  IImage,
-  IMetadata,
-  IPage,
-  IProduct,
-  IRoute,
-} from "../interfaces";
+import { ICategory, IMetadata, IPage, IProduct } from "../interfaces";
 
 export const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
