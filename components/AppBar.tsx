@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { MdMenu } from "react-icons/md";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { Route } from "../interfaces";
 import appBarStyles from "../styles/AppBar.module.scss";
@@ -24,14 +24,12 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
     <>
       {position === "top" && <div className={appBarStyles.layer} />}
       <nav
-        className={`
-                      ${appBarStyles.appBar}
-                      ${
-                        position === "top"
-                          ? appBarStyles.top
-                          : appBarStyles.bottom
-                      }
-                      `}
+        className={`${appBarStyles.appBar}
+                    ${
+                      position === "top"
+                        ? appBarStyles.top
+                        : appBarStyles.bottom
+                    }`}
       >
         {routes.map(({ title, slug, leading }) => {
           const isActive = router.asPath === `/${slug}`;

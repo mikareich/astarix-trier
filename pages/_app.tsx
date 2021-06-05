@@ -13,7 +13,6 @@ import { Page, Route } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
-  drawerState,
   favIconState,
   footbarRoutesState,
   heroState,
@@ -30,7 +29,6 @@ function App({ Component, pageProps }: IAppProps) {
   const heroImage = useRecoilValue(heroState);
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
-  const showDrawer = useRecoilValue(drawerState);
   const favIcon = useRecoilValue(favIconState);
 
   // format routes
@@ -62,7 +60,7 @@ function App({ Component, pageProps }: IAppProps) {
 
   return (
     <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
-      <Drawer routes={drawerRoutes} show={showDrawer} />
+      <Drawer routes={drawerRoutes} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
           <AppBar routes={navbarRoutes} position="top" />
