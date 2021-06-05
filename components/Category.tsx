@@ -7,7 +7,7 @@ import Product from "./Product";
 function Category({ title, products, note, id }: ICategory) {
   return (
     <section className={categoryStyles.category} id={id}>
-      <h3>{title}</h3>
+      <h3 id={title}>{title}</h3>
       <div dangerouslySetInnerHTML={{ __html: note }} />
       <div className={categoryStyles.products}>{products.map(Product)}</div>
     </section>
