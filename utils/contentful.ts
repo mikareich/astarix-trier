@@ -5,7 +5,6 @@ import { Asset, createClient, Entry } from "contentful";
 import {
   ICategory,
   IImage,
-  IMenuProps,
   IMetadata,
   IPage,
   IProduct,
