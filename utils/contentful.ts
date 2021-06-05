@@ -47,7 +47,7 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
             target: { fields },
           },
         }) =>
-          `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
+          `<img src="${fields.file.url}" loading="lazy" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
       },
     }),
   };
