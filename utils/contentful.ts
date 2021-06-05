@@ -135,6 +135,7 @@ function parseProduct(productEntry: Entry<ProductModel>): IProduct {
 export async function getMenu(): Promise<ICategory[]> {
   const data = await client.getEntries<CollectionModel>({
     content_type: "collection",
+    order: "sys.createdAt",
   });
 
   const menu: ICategory[] = data.items.map(parseCategory);

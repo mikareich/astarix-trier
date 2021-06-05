@@ -80,8 +80,6 @@ export async function getStaticProps(
   const metadata = await getMetadata();
   const menu = await getMenu();
 
-  console.log(menu);
-
   return {
     props: { ...pageProps, ...metadata, menu },
   };
