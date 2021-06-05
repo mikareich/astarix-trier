@@ -1,14 +1,13 @@
 import React from "react";
 
 import { IMenuProps } from "../interfaces";
-import menuStyles from "../styles/Menu.module.scss";
 import Category from "./Category";
 
 function Menu({ menu }: IMenuProps) {
   return (
     <div>
-      <h3>Übersicht</h3>
-      <ol className={menuStyles.overview}>
+      <b>Übersicht</b>
+      <ol>
         {menu.map((category) => (
           <li>
             <a href={`#${category.title}`}>{category.title}</a>

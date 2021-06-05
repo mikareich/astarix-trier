@@ -1,5 +1,6 @@
 import {
   GetServerSidePropsResult,
+  GetStaticPathsContext,
   GetStaticPathsResult,
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -50,9 +51,9 @@ function Page({
 
 type PathParams = { slug: string };
 
-export async function getStaticPaths(): Promise<
-  GetStaticPathsResult<PathParams>
-> {
+export async function getStaticPaths(
+  ctx: GetStaticPathsContext
+): Promise<GetStaticPathsResult<PathParams>> {
   const contentfulItems = await client.getEntries<IPage>({
     content_type: "page",
     // skip homepage
@@ -76,7 +77,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<IPage & IMetadata & IMenuProps>> {
   const { slug } = ctx.params;
 
-  const pageProps = await getPage(slug);
+  const pageProps = await getPage(slug, ctx.preview);
   const metadata = await getMetadata();
   const menu = await getMenu();
 

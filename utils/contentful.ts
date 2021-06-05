@@ -20,6 +20,7 @@ export const client = createClient({
 export const previewClient = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CPA_ACCESS_TOKEN,
+  host: "preview.contentful.com",
 });
 
 interface PageModel {
@@ -56,8 +57,8 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
   return page;
 }
 
-export async function getPage(slug: string): Promise<IPage> {
-  const data = await client.getEntries<PageModel>({
+export async function getPage(slug: string, preview = false): Promise<IPage> {
+  const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,
     select: "sys.id,fields",
