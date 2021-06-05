@@ -1,5 +1,5 @@
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { Block, BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, createClient, Entry } from "contentful";
 
 import { ICategory, IMetadata, IPage, IProduct } from "../interfaces";
@@ -26,6 +26,8 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
+  console.log(content);
+
   const page: IPage = {
     id,
     slug,
@@ -42,6 +44,12 @@ function parseEntryToPage(entry: Entry<PageModel>): IPage {
             ? // @ts-ignore
               node.content[0].value
             : `<p>${next(node.content)}</p>`,
+        [BLOCKS.EMBEDDED_ASSET]: ({
+          data: {
+            target: { fields },
+          },
+        }) =>
+          `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
       },
     }),
   };
@@ -107,6 +115,7 @@ function parseCategory(categoryEntry: Entry<CollectionModel>): ICategory {
     products: fields.products.map(parseProduct),
   };
 }
+
 function parseProduct(productEntry: Entry<ProductModel>): IProduct {
   const { fields, sys } = productEntry;
 

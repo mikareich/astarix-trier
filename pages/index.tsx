@@ -54,7 +54,11 @@ export async function getStaticProps(
   const metadata = await getMetadata();
 
   return {
-    props: { ...pageProps, ...metadata, preview: ctx.preview || false },
+    props: {
+      ...pageProps,
+      ...metadata,
+      preview: ctx.preview || false,
+    },
   };
 }
 
