@@ -7,7 +7,8 @@ import {
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IMetadata, IPage } from "../interfaces";
+import Menu from "../components/Menu";
+import { IMenuProps, IMetadata, IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -15,15 +16,17 @@ import {
   heroState,
   titleState,
 } from "../utils/atoms";
-import { client, getMetadata, getPage } from "../utils/contentful";
+import { client, getMenu, getMetadata, getPage } from "../utils/contentful";
 
 function Page({
   title,
   heroImage,
   content,
   metaDescription,
+  slug,
   favIcon,
-}: IPage & IMetadata) {
+  menu,
+}: IPage & IMetadata & IMenuProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -37,10 +40,11 @@ function Page({
   }, []);
 
   return (
-    <main
-      className={layoutStyles.main}
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+    <main className={layoutStyles.main}>
+      {" "}
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+      {slug === "speisekarte" && <Menu menu={menu} />}
+    </main>
   );
 }
 
@@ -69,14 +73,17 @@ export async function getStaticPaths(): Promise<
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPage & IMetadata>> {
+): Promise<GetStaticPropsResult<IPage & IMetadata & IMenuProps>> {
   const { slug } = ctx.params;
 
   const pageProps = await getPage(slug);
   const metadata = await getMetadata();
+  const menu = await getMenu();
+
+  console.log(menu);
 
   return {
-    props: { ...pageProps, ...metadata },
+    props: { ...pageProps, ...metadata, menu },
   };
 }
 

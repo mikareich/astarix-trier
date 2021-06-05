@@ -7,7 +7,7 @@ import {
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { IMetadata, IPage } from "../interfaces";
+import { IMenuProps, IMetadata, IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -15,7 +15,7 @@ import {
   heroState,
   titleState,
 } from "../utils/atoms";
-import { getMetadata, getPage } from "../utils/contentful";
+import { getMenu, getMetadata, getPage } from "../utils/contentful";
 
 function Index({
   title,

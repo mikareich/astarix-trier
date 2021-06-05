@@ -27,7 +27,7 @@ export interface IProduct {
   title: string;
   vegan: boolean;
   description: string;
-  variants: Array<{ variant: string }>;
+  variants: { variant: string; price: string | undefined; id: string }[];
   price: number;
   id: string;
 }

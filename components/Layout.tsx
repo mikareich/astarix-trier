@@ -16,7 +16,6 @@ function Layout({
   favIcon,
   children,
 }: ILayoutProps) {
-  console.log(favIcon);
   return (
     <>
       <Head>

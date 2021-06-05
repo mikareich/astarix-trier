@@ -1,8 +1,16 @@
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, createClient, Entry } from "contentful";
 
-import { IImage, IMetadata, IPage, IRoute } from "../interfaces";
+import {
+  ICategory,
+  IImage,
+  IMenuProps,
+  IMetadata,
+  IPage,
+  IProduct,
+  IRoute,
+} from "../interfaces";
 
 export const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -18,7 +26,7 @@ interface PageModel {
   slug: string;
   title: string;
   heroImage: Asset;
-  content: any;
+  content: Document;
 }
 
 function parseEntryToPage(entry: Entry<PageModel>): IPage {
@@ -73,19 +81,63 @@ export async function getMetadata(): Promise<IMetadata> {
 
   const { fields } = data;
 
-  console.log({
-    favIcon: {
-      url: fields.favIcon.fields.file.url,
-      description: fields.favIcon.fields.description,
-    },
-    metaDescription: fields.metaDescription,
-  });
-
   return {
     favIcon: {
-      url: fields.favIcon.fields.file.url,
+      url: `https://${fields.favIcon.fields.file.url}`,
       description: fields.favIcon.fields.description,
     },
     metaDescription: fields.metaDescription,
   };
+}
+
+interface CollectionModel {
+  title: string;
+  note: Document;
+  products: Entry<ProductModel>[];
+}
+
+interface ProductModel {
+  title: string;
+  description: Document;
+  vegan: boolean;
+  variants: { id: string; key: string; value: string }[];
+  price: number;
+}
+
+function parseCategory(categoryEntry: Entry<CollectionModel>): ICategory {
+  const { fields, sys } = categoryEntry;
+
+  return {
+    id: sys.id,
+    title: fields.title,
+    note: documentToHtmlString(fields?.note),
+    products: fields.products.map(parseProduct),
+  };
+}
+function parseProduct(productEntry: Entry<ProductModel>): IProduct {
+  const { fields, sys } = productEntry;
+
+  return {
+    id: sys.id,
+    title: fields.title,
+    description: documentToHtmlString(fields?.description),
+    price: fields.price,
+    vegan: fields.vegan,
+    variants:
+      fields?.variants?.map(({ key, value, id }) => ({
+        variant: key,
+        id,
+        price: value,
+      })) || [],
+  };
+}
+
+export async function getMenu(): Promise<ICategory[]> {
+  const data = await client.getEntries<CollectionModel>({
+    content_type: "collection",
+  });
+
+  const menu: ICategory[] = data.items.map(parseCategory);
+
+  return menu;
 }
