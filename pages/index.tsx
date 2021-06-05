@@ -47,8 +47,6 @@ function Index({
 export async function getStaticProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<IPage & IMetadata>> {
-  console.log(process.env.CPA_ACCESS_TOKEN);
-
   const pageProps = await getPage("home", ctx.preview);
   const metadata = await getMetadata();
 
