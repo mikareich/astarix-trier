@@ -4,53 +4,21 @@ import {
   GetStaticPropsResult,
 } from "next";
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
 
 import Menu from "../components/Menu";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import {
-  descriptionState,
-  favIconState,
-  footbarRoutesState,
-  heroState,
-  navbarRoutesState,
-  titleState,
-} from "../utils/atoms";
 import {
   getAllPageRoutes,
   getMenu,
   getMetadata,
   getPage,
 } from "../utils/contentful";
+import { updateAppContext } from "../utils/recoil";
+import preview from "./api/preview";
 
-function Page({
-  title,
-  heroImage,
-  content,
-  metaDescription,
-  slug,
-  favIcon,
-  menu,
-  preview,
-  navbarRoutes,
-  footbarRoutes,
-}: PageProps) {
-  const [, setTitle] = useRecoilState(titleState);
-  const [, setDescription] = useRecoilState(descriptionState);
-  const [, setFavIcon] = useRecoilState(favIconState);
-  const [, setHeroImage] = useRecoilState(heroState);
-  const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
-  const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
-
-  useEffect(() => {
-    setTitle(`Astarix Trier | ${title}`);
-    setDescription(metaDescription);
-    setFavIcon(favIcon);
-    setHeroImage(heroImage);
-    setNavbarRoutes(navbarRoutes);
-    setFootbarRoutes(footbarRoutes);
-  }, []);
+function Page(props: PageProps) {
+  useEffect(() => updateAppContext(props), []);
 
   return (
     <>
@@ -60,8 +28,8 @@ function Page({
         </a>
       )}
       <main className={layoutStyles.main}>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-        {slug === "speisekarte" && <Menu menu={menu} />}
+        <div dangerouslySetInnerHTML={{ __html: props.content }} />
+        {props.slug === "speisekarte" && <Menu menu={props.menu} />}
       </main>
     </>
   );

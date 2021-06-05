@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 
 import { Route } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
-import { drawerState } from "../utils/atoms";
+import { drawerState } from "../utils/recoil/atoms";
 
 interface DrawerProps {
   routes: Route[];
