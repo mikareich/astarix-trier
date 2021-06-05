@@ -15,13 +15,17 @@ export interface IDescription {
   description: string;
 }
 
-export interface IPageProps {
+export interface IPage {
   slug: string;
   title: string;
   heroImage: IImage;
   content: string;
   id: string;
+}
+
+export interface IPageProps extends IPage, IMetadata {
   preview: boolean;
+  menu?: ICategory[];
 }
 
 export interface IProduct {
@@ -38,10 +42,6 @@ export interface ICategory {
   note: string;
   products: IProduct[];
   id: string;
-}
-
-export interface IMenuProps {
-  menu: ICategory[];
 }
 
 export interface IMetadata {

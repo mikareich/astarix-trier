@@ -1,6 +1,4 @@
 import {
-  GetServerSidePropsResult,
-  GetStaticPathsContext,
   GetStaticPathsResult,
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -9,7 +7,7 @@ import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import Menu from "../components/Menu";
-import { IMenuProps, IMetadata, IPageProps } from "../interfaces";
+import { IPage, IPageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -28,7 +26,7 @@ function Page({
   favIcon,
   menu,
   preview,
-}: IPageProps & IMetadata & IMenuProps) {
+}: IPageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
   const [, setFavIcon] = useRecoilState(favIconState);
@@ -58,10 +56,10 @@ function Page({
 
 type PathParams = { slug: string };
 
-export async function getStaticPaths(
-  ctx: GetStaticPathsContext
-): Promise<GetStaticPathsResult<PathParams>> {
-  const contentfulItems = await client.getEntries<IPageProps>({
+export async function getStaticPaths(): Promise<
+  GetStaticPathsResult<PathParams>
+> {
+  const contentfulItems = await client.getEntries<IPage>({
     content_type: "page",
     // skip homepage
     "fields.slug[ne]": "home",
@@ -81,7 +79,7 @@ export async function getStaticPaths(
 
 export async function getStaticProps(
   ctx: GetStaticPropsContext<PathParams>
-): Promise<GetStaticPropsResult<IPageProps & IMetadata & IMenuProps>> {
+): Promise<GetStaticPropsResult<IPageProps>> {
   const { slug } = ctx.params;
 
   const pageProps = await getPage(slug, ctx.preview);

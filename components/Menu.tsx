@@ -1,7 +1,11 @@
 import React from "react";
 
-import { IMenuProps } from "../interfaces";
+import { ICategory } from "../interfaces";
 import Category from "./Category";
+
+interface IMenuProps {
+  menu: ICategory[];
+}
 
 function Menu({ menu }: IMenuProps) {
   return (

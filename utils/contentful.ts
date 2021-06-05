@@ -5,9 +5,8 @@ import { Asset, createClient, Entry } from "contentful";
 import {
   ICategory,
   IImage,
-  IMenuProps,
   IMetadata,
-  IPageProps,
+  IPage,
   IProduct,
   IRoute,
 } from "../interfaces";
@@ -30,11 +29,11 @@ interface PageModel {
   content: Document;
 }
 
-function parseEntryToPage(entry: Entry<PageModel>): IPageProps {
+function parseEntryToPage(entry: Entry<PageModel>): IPage {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
-  const page: IPageProps = {
+  const page: IPage = {
     id,
     slug,
     title,
@@ -57,10 +56,7 @@ function parseEntryToPage(entry: Entry<PageModel>): IPageProps {
   return page;
 }
 
-export async function getPage(
-  slug: string,
-  preview = false
-): Promise<IPageProps> {
+export async function getPage(slug: string, preview = false): Promise<IPage> {
   const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,

@@ -8,7 +8,7 @@ import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
 import HeroImage from "../components/HeroImage";
 import Layout from "../components/Layout";
-import { IPageProps } from "../interfaces";
+import { IPage } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
@@ -21,7 +21,7 @@ import { drawerRoutes, footerRoutes, navBarRoutes } from "../utils/routes";
 
 export interface IAppProps {
   Component: React.ComponentClass;
-  pageProps: IPageProps;
+  pageProps: IPage;
 }
 
 function App({ Component, pageProps }: IAppProps) {
