@@ -2,14 +2,14 @@ import React from "react";
 
 import { ICategory } from "../interfaces";
 import categoryStyles from "../styles/Category.module.scss";
-import MenuItem from "./MenuItem";
+import Product from "./Product";
 
-function Category({ title, products, note }: ICategory) {
+function Category({ title, products, note, id }: ICategory) {
   return (
-    <section className={categoryStyles.category}>
-      <h3>{title}</h3>
-      <p>{note}</p>
-      <div className={categoryStyles.products}>{products.map(MenuItem)}</div>
+    <section className={categoryStyles.category} id={id}>
+      <h3 id={title}>{title}</h3>
+      <div dangerouslySetInnerHTML={{ __html: note }} />
+      <div className={categoryStyles.products}>{products.map(Product)}</div>
     </section>
   );
 }

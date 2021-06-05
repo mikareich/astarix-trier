@@ -1,6 +1,6 @@
 @import "./colors.scss";
 
-.menuItem {
+.product {
   display: grid;
   grid-template:
     "title vegan space price" auto
@@ -31,10 +31,37 @@
 .description {
   grid-area: description;
   color: $gray;
+  font-weight: 500;
+  p {
+    margin: 0;
+    color: unset;
+  }
 }
 
 .variants {
   grid-area: variants;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.variant {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: $gray;
+  margin-bottom: 10px;
+  gap: 5px;
+
+  .variantName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .variantPrice {
+    white-space: nowrap;
+  }
 }
 
 @media screen and (max-width: 568px) {

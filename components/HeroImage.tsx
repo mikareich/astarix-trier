@@ -2,11 +2,15 @@ import Image from "next/image";
 import React from "react";
 import { Parallax } from "react-scroll-parallax";
 
-import { IHeroImageProps } from "../interfaces";
 import heroImageStyles from "../styles/HeroImage.module.scss";
 import layoutStyles from "../styles/Layout.module.scss";
 
-function HeroImage({ src, alt }: IHeroImageProps) {
+export interface IHeroImageProps {
+  src: string;
+  description: string;
+}
+
+function HeroImage({ src, description }: IHeroImageProps) {
   const yOffset = [-30, 30];
   return (
     <Parallax
@@ -16,7 +20,7 @@ function HeroImage({ src, alt }: IHeroImageProps) {
       <Image
         className={heroImageStyles.heroImage}
         src={src}
-        alt={alt}
+        alt={description}
         layout="fill"
       />
     </Parallax>
