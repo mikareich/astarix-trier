@@ -13,12 +13,14 @@ function Menu({ menu }: IMenuProps) {
       <b>Übersicht</b>
       <ol>
         {menu.map((category) => (
-          <li>
+          <li key={category.id}>
             <a href={`#${category.title}`}>{category.title}</a>
           </li>
         ))}
       </ol>
-      {menu.map(Category)}
+      {menu.map((category) => (
+        <Category key={category.id} {...category} />
+      ))}
     </div>
   );
 }
