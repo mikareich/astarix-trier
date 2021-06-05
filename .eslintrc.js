@@ -16,7 +16,6 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "simple-import-sort"],
   rules: {
     "react/prop-types": "off",
-    "react/destructuring-assignment": "off",
     "no-use-before-define": "off",
     "no-unused-vars": "warn",
     "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }],

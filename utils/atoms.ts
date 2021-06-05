@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { Image, Route } from "../../interfaces";
+import { Image, Route } from "../interfaces";
 
 export const drawerState = atom({
   key: "drawerState",

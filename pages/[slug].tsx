@@ -6,6 +6,7 @@ import {
 import React, { useEffect } from "react";
 
 import Menu from "../components/Menu";
+import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
@@ -14,12 +15,8 @@ import {
   getMetadata,
   getPage,
 } from "../utils/contentful";
-import { updateAppContext } from "../utils/recoil";
-import preview from "./api/preview";
 
-function Page(props: PageProps) {
-  useEffect(() => updateAppContext(props), []);
-
+function Page({ preview, content, menu, slug, ...restProps }: PageProps) {
   return (
     <>
       {preview && (
@@ -28,9 +25,10 @@ function Page(props: PageProps) {
         </a>
       )}
       <main className={layoutStyles.main}>
-        <div dangerouslySetInnerHTML={{ __html: props.content }} />
-        {props.slug === "speisekarte" && <Menu menu={props.menu} />}
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+        {slug === "speisekarte" && <Menu menu={menu} />}
       </main>
+      <StateUpdater {...{ preview, content, menu, slug, ...restProps }} />
     </>
   );
 }

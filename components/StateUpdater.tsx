@@ -1,6 +1,7 @@
-import { useRecoilState } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { PageProps } from "../../interfaces";
+import { PageProps } from "../interfaces";
 import {
   descriptionState,
   favIconState,
@@ -8,9 +9,9 @@ import {
   heroState,
   navbarRoutesState,
   titleState,
-} from "./atoms";
+} from "../utils/atoms";
 
-export default function updateAppContext({
+function StateUpdater({
   title,
   heroImage,
   metaDescription,
@@ -25,10 +26,16 @@ export default function updateAppContext({
   const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
   const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
 
-  setTitle(`Astarix Trier | ${title}`);
-  setDescription(metaDescription);
-  setFavIcon(favIcon);
-  setHeroImage(heroImage);
-  setNavbarRoutes(navbarRoutes);
-  setFootbarRoutes(footbarRoutes);
+  useEffect(() => {
+    setTitle(`Astarix Trier | ${title}`);
+    setDescription(metaDescription);
+    setFavIcon(favIcon);
+    setHeroImage(heroImage);
+    setNavbarRoutes(navbarRoutes);
+    setFootbarRoutes(footbarRoutes);
+  }, []);
+
+  return null;
 }
+
+export default StateUpdater;

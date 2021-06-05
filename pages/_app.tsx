@@ -18,7 +18,7 @@ import {
   heroState,
   navbarRoutesState,
   titleState,
-} from "../utils/recoil";
+} from "../utils/atoms";
 
 export interface AppProps {
   Component: React.ComponentClass;
