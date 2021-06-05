@@ -42,7 +42,7 @@ function Drawer({ routes }: IDrawerProps) {
     >
       <div className={drawerStyles.drawer}>
         {routes.map(({ title, slug }) => {
-          const isActive = router.pathname === `/${slug}`;
+          const isActive = router.asPath === `/${slug}`;
           const className = `
           ${drawerStyles.link} 
           ${isActive ? "active" : "inactive"}

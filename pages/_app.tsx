@@ -8,16 +8,18 @@ import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
 import HeroImage from "../components/HeroImage";
 import Layout from "../components/Layout";
-import { IPage } from "../interfaces";
+import Logo from "../components/Logo";
+import { IPage, IRoute } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
   descriptionState,
   drawerState,
   favIconState,
+  footbarRoutesState,
   heroState,
+  navbarRoutesState,
   titleState,
 } from "../utils/atoms";
-import { drawerRoutes, footerRoutes, navBarRoutes } from "../utils/routes";
 
 export interface IAppProps {
   Component: React.ComponentClass;
@@ -31,17 +33,44 @@ function App({ Component, pageProps }: IAppProps) {
   const showDrawer = useRecoilValue(drawerState);
   const favIcon = useRecoilValue(favIconState);
 
+  // format routes
+
+  const leadingRouteAsImage = (route: IRoute, navbar): IRoute => ({
+    ...route,
+    title:
+      (route.leading &&
+        (navbar ? (
+          <Logo.Astarix color="red" />
+        ) : (
+          <Logo.Astarix color="gray" />
+        ))) ||
+      route.title,
+  });
+
+  const isNotLeadingFromFootbar = (route: IRoute) =>
+    !(route.leading && footbarRoutes.includes(route));
+
+  const navbarRoutes = useRecoilValue(navbarRoutesState).map((route) =>
+    leadingRouteAsImage(route, true)
+  );
+  const footbarRoutes = useRecoilValue(footbarRoutesState).map((route) =>
+    leadingRouteAsImage(route, false)
+  );
+  const drawerRoutes = [...navbarRoutes, ...footbarRoutes].filter(
+    isNotLeadingFromFootbar
+  );
+
   return (
     <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
       <Drawer routes={drawerRoutes} show={showDrawer} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
-          <AppBar routes={navBarRoutes} position="top" />
+          <AppBar routes={navbarRoutes} position="top" />
         </header>
         <HeroImage src={heroImage.url} description={heroImage.description} />
         <Component {...pageProps} />
         <footer className={layoutStyles.footer}>
-          <AppBar routes={footerRoutes} position="bottom" />
+          <AppBar routes={footbarRoutes} position="bottom" />
         </footer>
       </div>
     </Layout>

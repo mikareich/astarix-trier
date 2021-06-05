@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { IImage } from "../interfaces";
+import { IImage, IRoute } from "../interfaces";
 
 export const drawerState = atom({
   key: "drawerState",
@@ -31,4 +31,14 @@ export const favIconState = atom<IImage>({
     url: "https://assets.ctfassets.net/7hyqdl211gwx/w5PX3REw0YsFSJ2LKCRef/0c10761f195bc42824e20258a6692bab/astarix-x.ico",
     description: "Astarix X",
   },
+});
+
+export const navbarRoutesState = atom<IRoute[]>({
+  key: "navbarRoutesState",
+  default: [],
+});
+
+export const footbarRoutesState = atom<IRoute[]>({
+  key: "footbarRoutesState",
+  default: [],
 });

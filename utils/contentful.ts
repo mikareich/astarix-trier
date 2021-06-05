@@ -2,7 +2,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { Block, BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, createClient, Entry } from "contentful";
 
-import { ICategory, IMetadata, IPage, IProduct } from "../interfaces";
+import { ICategory, IMetadata, IPage, IProduct, IRoute } from "../interfaces";
 
 export const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -25,8 +25,6 @@ interface PageModel {
 function parseEntryToPage(entry: Entry<PageModel>): IPage {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
-
-  console.log(content);
 
   const page: IPage = {
     id,
@@ -72,12 +70,23 @@ export async function getPage(slug: string, preview = false): Promise<IPage> {
 interface AppModel {
   favIcon: Asset;
   metaDescription: string;
+  navbar: Entry<PageModel>[];
+  footbar: Entry<PageModel>[];
+}
+
+function parsePageToRoute({ slug, title, id }: IPage): IRoute {
+  return {
+    slug: slug === "home" ? "" : slug,
+    title,
+    id,
+    leading: slug === "home",
+  };
 }
 
 export async function getMetadata(): Promise<IMetadata> {
   const data = await client.getEntry<AppModel>("4aS9BmUxul6TfbSHx5qYbf", {
     content_type: "app",
-    select: "fields.favIcon,fields.metaDescription",
+    select: "fields",
   });
 
   const { fields } = data;
@@ -88,7 +97,21 @@ export async function getMetadata(): Promise<IMetadata> {
       description: fields.favIcon.fields.description,
     },
     metaDescription: fields.metaDescription,
+    navbarRoutes: fields.navbar.map(parseEntryToPage).map(parsePageToRoute),
+    footbarRoutes: fields.footbar.map(parseEntryToPage).map(parsePageToRoute),
   };
+}
+
+export async function getAllPageRoutes(): Promise<IRoute[]> {
+  const data = await client.getEntries<PageModel>({
+    content_type: "page",
+  });
+
+  const routes: IRoute[] = data.items
+    .map(parseEntryToPage)
+    .map(parsePageToRoute);
+
+  return routes;
 }
 
 interface CollectionModel {
