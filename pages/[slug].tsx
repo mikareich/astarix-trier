@@ -16,19 +16,14 @@ import {
   getPage,
 } from "../utils/contentful";
 
-function Page({ preview, content, menu, slug, ...restProps }: PageProps) {
+function Page({ content, menu, slug, ...restProps }: PageProps) {
   return (
     <>
-      {preview && (
-        <a href="/api/clear-preview">
-          You are in preview-mode. Click to exit preview
-        </a>
-      )}
       <main className={layoutStyles.main}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
         {slug === "speisekarte" && <Menu menu={menu} />}
       </main>
-      <StateUpdater {...{ preview, content, menu, slug, ...restProps }} />
+      <StateUpdater {...{ content, menu, slug, ...restProps }} />
     </>
   );
 }

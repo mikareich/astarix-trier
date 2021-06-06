@@ -17,6 +17,7 @@ import {
   footbarRoutesState,
   heroState,
   navbarRoutesState,
+  previewState,
   titleState,
 } from "../utils/atoms";
 
@@ -30,6 +31,7 @@ function App({ Component, pageProps }: AppProps) {
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
   const favIcon = useRecoilValue(favIconState);
+  const preview = useRecoilValue(previewState);
 
   // format routes
 
@@ -70,6 +72,11 @@ function App({ Component, pageProps }: AppProps) {
         <footer className={layoutStyles.footer}>
           <AppBar routes={footbarRoutes} position="bottom" />
         </footer>
+        {preview && (
+          <a href="/api/clear-preview">
+            You are in preview-mode. Click to exit preview
+          </a>
+        )}
       </div>
     </Layout>
   );

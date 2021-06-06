@@ -6,19 +6,14 @@ import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMetadata, getPage } from "../utils/contentful";
 
-function Index({ preview, content, ...restProps }: PageProps) {
+function Index({ content, ...restProps }: PageProps) {
   return (
     <>
-      {preview && (
-        <a href="/api/clear-preview">
-          You are in preview-mode. Click to exit preview
-        </a>
-      )}
       <main
         className={layoutStyles.main}
         dangerouslySetInnerHTML={{ __html: content }}
       />
-      <StateUpdater {...{ preview, content, ...restProps }} />
+      <StateUpdater {...{ content, ...restProps }} />
     </>
   );
 }

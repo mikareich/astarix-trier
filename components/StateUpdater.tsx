@@ -8,6 +8,7 @@ import {
   footbarRoutesState,
   heroState,
   navbarRoutesState,
+  previewState,
   titleState,
 } from "../utils/atoms";
 
@@ -18,6 +19,7 @@ function StateUpdater({
   favIcon,
   navbarRoutes,
   footbarRoutes,
+  preview,
 }: PageProps) {
   const [, setTitle] = useRecoilState(titleState);
   const [, setDescription] = useRecoilState(descriptionState);
@@ -25,6 +27,7 @@ function StateUpdater({
   const [, setHeroImage] = useRecoilState(heroState);
   const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
   const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
+  const [, setPreview] = useRecoilState(previewState);
 
   useEffect(() => {
     setTitle(`Astarix Trier | ${title}`);
@@ -33,6 +36,7 @@ function StateUpdater({
     setHeroImage(heroImage);
     setNavbarRoutes(navbarRoutes);
     setFootbarRoutes(footbarRoutes);
+    setPreview(preview);
   }, []);
 
   return null;
