@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+function handler(req: NextApiRequest, res: NextApiResponse) {
   // Calling setPreviewData sets a preview cookies that turn on the preview mode.
   // Any requests to Next.js containing these cookies will be seen as preview mode,
   // and the behavior for statically generated pages will change.
@@ -10,4 +10,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const { slug } = req.query;
   res.redirect(`/${slug === "home" ? "" : slug}`);
   res.end();
-};
+}
+
+export default handler;

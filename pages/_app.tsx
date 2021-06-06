@@ -17,19 +17,21 @@ import {
   footbarRoutesState,
   heroState,
   navbarRoutesState,
+  previewState,
   titleState,
 } from "../utils/atoms";
 
-export interface IAppProps {
+export interface AppProps {
   Component: React.ComponentClass;
   pageProps: Page;
 }
 
-function App({ Component, pageProps }: IAppProps) {
+function App({ Component, pageProps }: AppProps) {
   const heroImage = useRecoilValue(heroState);
   const title = useRecoilValue(titleState);
   const description = useRecoilValue(descriptionState);
   const favIcon = useRecoilValue(favIconState);
+  const preview = useRecoilValue(previewState);
 
   // format routes
 
@@ -70,12 +72,17 @@ function App({ Component, pageProps }: IAppProps) {
         <footer className={layoutStyles.footer}>
           <AppBar routes={footbarRoutes} position="bottom" />
         </footer>
+        {preview && (
+          <a href="/api/clear-preview">
+            You are in preview-mode. Click to exit preview
+          </a>
+        )}
       </div>
     </Layout>
   );
 }
 
-function AppContainer({ Component, pageProps }: IAppProps) {
+function AppContainer({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ParallaxProvider scrollAxis="vertical">

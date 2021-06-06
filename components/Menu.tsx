@@ -1,6 +1,8 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 import { Category as CategoryProps } from "../interfaces";
+import menuStyles from "../styles/Menu.module.scss";
 import Category from "./Category";
 
 interface MenuProps {
@@ -8,19 +10,46 @@ interface MenuProps {
 }
 
 function Menu({ menu }: MenuProps) {
+  const [updatedValue, updateComponent] = useState<Object>();
+  const [activeCategory, setActiveCategory] = useState<CategoryProps>();
+
+  useEffect(() => {
+    const categoryTitle = window.location.hash.slice(
+      1,
+      window.location.hash.length
+    );
+    const category = menu.find((c) => c.title === categoryTitle);
+    setActiveCategory(category);
+  }, []);
+
   return (
-    <div>
-      <b>Übersicht</b>
-      <ol>
+    <div className={menuStyles.menu}>
+      <div className={menuStyles.categories}>
         {menu.map((category) => (
-          <li key={category.id}>
-            <a href={`#${category.title}`}>{category.title}</a>
-          </li>
+          <Category key={category.id} {...category} />
         ))}
-      </ol>
-      {menu.map((category) => (
-        <Category key={category.id} {...category} />
-      ))}
+      </div>
+
+      <div className={menuStyles.toc}>
+        <h4>Übersicht</h4>
+        <ol>
+          {menu.map((category) => {
+            const isActive = category.id === activeCategory?.id;
+
+            return (
+              <li key={category.id} className={menuStyles.tocItem}>
+                <a
+                  href={`#${category.title}`}
+                  className={`${isActive ? "" : "inactive"}`}
+                  onClick={() => setActiveCategory(category)}
+                >
+                  {category.title}
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
     </div>
   );
 }
