@@ -22,6 +22,16 @@
   padding: 30px 150px;
 }
 
+.imageContainer {
+  width: 100%;
+  height: 400px;
+  position: relative;
+
+  img {
+    object-fit: cover;
+  }
+}
+
 .footer {
   grid-area: footer;
 }
@@ -45,5 +55,9 @@
 
   .hero {
     margin-top: -50px;
+  }
+
+  .imageContainer {
+    height: 300px;
   }
 }

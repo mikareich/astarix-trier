@@ -3,8 +3,9 @@ import {
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 
+import BlockRenderer from "../components/ContentRenderer";
 import Menu from "../components/Menu";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
@@ -20,7 +21,7 @@ function Page({ content, menu, id, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <BlockRenderer content={content} />
         {/* Speisekarte-ID */}
         {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
       </main>
