@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { getMetadata, getPage } from "../utils/contentful";
+import { getMetadata, getPageBySlug } from "../utils/contentful";
 
 function Index({ content, ...restProps }: PageProps) {
   return (
@@ -21,7 +21,7 @@ function Index({ content, ...restProps }: PageProps) {
 export async function getStaticProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<PageProps>> {
-  const pageProps = await getPage("home", ctx.preview);
+  const pageProps = await getPageBySlug("", ctx.preview);
   const metadata = await getMetadata();
 
   return {

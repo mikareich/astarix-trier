@@ -8,7 +8,7 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
     maxAge: 60 * 60, // The preview mode cookies expire in 1 hour
   });
   const { slug } = req.query;
-  res.redirect(`/${slug === "home" ? "" : slug}`);
+  res.redirect(`/${slug}`);
   res.end();
 }
 

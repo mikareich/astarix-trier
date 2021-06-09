@@ -13,17 +13,18 @@ import {
   getAllPageRoutes,
   getMenu,
   getMetadata,
-  getPage,
+  getPageBySlug,
 } from "../utils/contentful";
 
-function Page({ content, menu, slug, ...restProps }: PageProps) {
+function Page({ content, menu, id, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
         <div dangerouslySetInnerHTML={{ __html: content }} />
-        {slug === "speisekarte" && <Menu menu={menu} />}
+        {/* Speisekarte-ID */}
+        {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
       </main>
-      <StateUpdater {...{ content, menu, slug, ...restProps }} />
+      <StateUpdater {...{ content, menu, id, ...restProps }} />
     </>
   );
 }
@@ -38,7 +39,10 @@ export async function getStaticPaths(): Promise<
   const routes = await getAllPageRoutes();
 
   const staticPaths = routes
-    .map(({ slug }) => slug !== "" && { params: { slug } })
+    .map(
+      // skip home-page with id 7qFU0oIrQlFr5R2tORmyFQ
+      ({ id, slug }) => id !== "7qFU0oIrQlFr5R2tORmyFQ" && { params: { slug } }
+    )
     .filter((n) => n);
 
   return {
@@ -52,7 +56,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
-  const pageProps = await getPage(slug, ctx.preview);
+  const pageProps = await getPageBySlug(slug, ctx.preview);
   const metadata = await getMetadata();
   const menu = await getMenu();
 
