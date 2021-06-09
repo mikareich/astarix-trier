@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { MdMenu } from "react-icons/md";
+import { MdClose, MdMenu } from "react-icons/md";
 import { useRecoilState } from "recoil";
 
 import { Route } from "../interfaces";
@@ -42,7 +42,11 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
           return (
             <Link href={`/${slug}`} passHref key={slug}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a href="#" className={className}>
+              <a
+                href="#"
+                className={className}
+                onClick={() => setDrawer(false)}
+              >
                 {title}
               </a>
             </Link>
@@ -51,9 +55,13 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
         <button
           type="button"
           className={appBarStyles.iconButton}
-          aria-label="Öffne Drawer"
+          aria-label="Öffne Drawer/ Schließe Drawer"
         >
-          <MdMenu size={24} onClick={toggleDrawer} />
+          {showDrawer ? (
+            <MdClose size={24} onClick={toggleDrawer} />
+          ) : (
+            <MdMenu size={24} onClick={toggleDrawer} />
+          )}
         </button>
       </nav>
     </>

@@ -38,6 +38,7 @@ function Drawer({ routes }: DrawerProps) {
       animate={showDrawer ? "visible" : "hidden"}
       initial="hidden"
       className={drawerStyles.drawerContainer}
+      transition={{ duration: 0.2 }}
     >
       <div className={drawerStyles.drawer}>
         {routes.map(({ title, slug }) => {
