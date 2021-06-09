@@ -47,8 +47,7 @@ function App({ Component, pageProps }: AppProps) {
       route.title,
   });
 
-  const isNotLeadingFromFootbar = (route: Route) =>
-    !(route.leading && footbarRoutes.includes(route));
+  const isNotLeadingFromFootbar = (route: Route) => !route.leading;
 
   const navbarRoutes = useRecoilValue(navbarRoutesState).map((route) =>
     leadingRouteAsImage(route, true)
