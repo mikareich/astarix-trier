@@ -21,8 +21,8 @@ function parseEntryToPage(entry: Entry<PageModel>): Page {
     slug,
     title,
     heroImage: {
-      url: `https:${heroImage.fields.file.url}`,
-      description: heroImage.fields.description,
+      url: `https:${heroImage.fields?.file?.url}`,
+      description: heroImage?.fields?.description,
     },
     content: documentToHtmlString(content, {
       renderNode: {
