@@ -13,16 +13,20 @@ interface PageModel {
 }
 
 function parseEntryToPage(entry: Entry<PageModel>): Page {
+  console.log(entry);
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
   const page: Page = {
     id,
-    slug,
+    slug: slug || "",
     title,
     heroImage: {
-      url: `https:${heroImage.fields.file.url}`,
-      description: heroImage.fields.description,
+      url:
+        (heroImage?.fields?.file?.url &&
+          `https:${heroImage?.fields?.file?.url}`) ||
+        "",
+      description: heroImage?.fields?.description || "",
     },
     content: documentToHtmlString(content, {
       renderNode: {
@@ -45,7 +49,10 @@ function parseEntryToPage(entry: Entry<PageModel>): Page {
   return page;
 }
 
-export async function getPage(slug: string, preview = false): Promise<Page> {
+export async function getPageBySlug(
+  slug: string,
+  preview = false
+): Promise<Page> {
   const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,
@@ -66,10 +73,10 @@ interface AppModel {
 
 function parsePageToRoute({ slug, title, id }: Page): Route {
   return {
-    slug: slug === "home" ? "" : slug,
+    slug,
     title,
     id,
-    leading: slug === "home",
+    leading: id === "7qFU0oIrQlFr5R2tORmyFQ",
   };
 }
 

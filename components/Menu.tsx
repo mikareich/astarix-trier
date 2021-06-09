@@ -31,7 +31,7 @@ function Menu({ menu }: MenuProps) {
       </div>
 
       <div className={menuStyles.toc}>
-        <h4>Übersicht</h4>
+        <h3>Übersicht</h3>
         <ol>
           {menu.map((category) => {
             const isActive = category.id === activeCategory?.id;

@@ -1,13 +1,9 @@
 @import "./colors.scss";
 
 .menu {
-  width: 100%;
+  height: min-content;
   display: grid;
-  grid-template-columns: minmax(400px, 1fr) auto;
-  column-gap: 20px;
-}
-
-.categories {
+  grid-template-columns: 1fr auto;
 }
 
 /* toc = Table Of Content */
@@ -17,6 +13,7 @@
   top: 100px;
   height: 300px;
   width: clamp(100px, 200px, 200px);
+  margin-left: 20px;
 }
 
 .tocItem {

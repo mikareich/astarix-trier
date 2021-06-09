@@ -37,7 +37,7 @@ function StateUpdater({
     setNavbarRoutes(navbarRoutes);
     setFootbarRoutes(footbarRoutes);
     setPreview(preview);
-  }, []);
+  });
 
   return null;
 }
