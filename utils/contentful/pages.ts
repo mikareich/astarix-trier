@@ -13,7 +13,6 @@ interface PageModel {
 }
 
 function parseEntryToPage(entry: Entry<PageModel>): Page {
-  console.log(entry);
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
