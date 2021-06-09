@@ -27,22 +27,7 @@ function parseEntryToPage(entry: Entry<PageModel>): Page {
         "",
       description: heroImage?.fields?.description || "",
     },
-    content: documentToHtmlString(content, {
-      renderNode: {
-        [BLOCKS.PARAGRAPH]: (node, next) =>
-          // @ts-ignore
-          node.content[0].value[0] === "<"
-            ? // @ts-ignore
-              node.content[0].value
-            : `<p>${next(node.content)}</p>`,
-        [BLOCKS.EMBEDDED_ASSET]: ({
-          data: {
-            target: { fields },
-          },
-        }) =>
-          `<img src="${fields.file.url}" loading="lazy" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`,
-      },
-    }),
+    content,
   };
 
   return page;

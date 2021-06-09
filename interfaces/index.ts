@@ -1,3 +1,4 @@
+import { Document } from "@contentful/rich-text-types";
 import React from "react";
 
 export interface Route {
@@ -16,7 +17,7 @@ export interface Page {
   slug: string;
   title: string;
   heroImage: Image;
-  content: string;
+  content: Document;
   id: string;
 }
 
