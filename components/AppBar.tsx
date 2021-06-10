@@ -33,7 +33,6 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
       >
         {routes.map(({ title, slug, leading }) => {
           const isActive = (router.query.slug || router.route) === slug;
-          console.log(router);
           const className = `
             ${appBarStyles.link} 
             ${leading ? appBarStyles.leading : "inactive"}

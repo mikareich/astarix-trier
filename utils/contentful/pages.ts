@@ -1,5 +1,4 @@
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
-import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { Document } from "@contentful/rich-text-types";
 import { Asset, Entry } from "contentful";
 
 import { Metadata, Page, Route } from "../../interfaces";
