@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 
 import { Category as CategoryProps } from "../interfaces";
