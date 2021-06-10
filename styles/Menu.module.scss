@@ -32,7 +32,17 @@
 }
 
 @media screen and (max-width: 768px) {
+  .menu {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
   .toc {
-    display: none;
+    position: relative;
+    width: 100%;
+    top: 0;
+    height: auto;
+    grid-row: 1;
+    margin-left: 0;
   }
 }
