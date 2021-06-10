@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
-import React, { useEffect } from "react";
+import React from "react";
 
 import BlockRenderer from "../components/ContentRenderer";
 import StateUpdater from "../components/StateUpdater";
