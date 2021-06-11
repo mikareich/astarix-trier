@@ -6,12 +6,15 @@
     "title vegan space price" auto
     "description description description description" auto
     "variants variants variants variants" auto / auto auto 1fr auto;
-  gap: 5px;
+  gap: 10px;
 }
 
 .title {
   grid-area: title;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .vegan {
@@ -67,9 +70,8 @@
 @media screen and (max-width: 568px) {
   .product {
     grid-template:
-      "title vegan" auto
-      "description description" auto
-      "variants variants" auto
-      "price price" auto / 1fr auto;
+      "title vegan price" auto
+      "description description description" auto
+      "variants variants variants" auto / 1fr auto auto;
   }
 }
