@@ -11,7 +11,7 @@
 .toc {
   position: sticky;
   top: 100px;
-  height: 300px;
+  height: min-content;
   width: clamp(100px, 200px, 200px);
   margin-left: 20px;
 }
@@ -41,7 +41,6 @@
     position: relative;
     width: 100%;
     top: 0;
-    height: auto;
     grid-row: 1;
     margin-left: 0;
   }
