@@ -14,7 +14,7 @@ import {
   getAllPageRoutes,
   getMenu,
   getMetadata,
-  getPageBySlug,
+  getPage,
 } from "../utils/contentful";
 
 function Page({ content, menu, id, ...restProps }: PageProps) {
@@ -57,7 +57,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
-  const pageProps = await getPageBySlug(slug, ctx.preview);
+  const pageProps = await getPage(slug, ctx.preview);
   const metadata = await getMetadata();
   const menu = await getMenu();
 

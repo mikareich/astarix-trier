@@ -5,7 +5,7 @@ import BlockRenderer from "../components/ContentRenderer";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { getMetadata, getPageBySlug } from "../utils/contentful";
+import { getMetadata, getPage } from "../utils/contentful";
 
 function Index({ content, ...restProps }: PageProps) {
   return (
@@ -21,7 +21,7 @@ function Index({ content, ...restProps }: PageProps) {
 export async function getStaticProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<PageProps>> {
-  const pageProps = await getPageBySlug("", ctx.preview);
+  const pageProps = await getPage("", ctx.preview);
   const metadata = await getMetadata();
 
   return {

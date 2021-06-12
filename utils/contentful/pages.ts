@@ -11,7 +11,12 @@ interface PageModel {
   content: Document;
 }
 
-function parseEntryToPage(entry: Entry<PageModel>): Page {
+/**
+ * Parse entry to page
+ * @param entry Page entry
+ * @returns Parsed page
+ */
+function parsePage(entry: Entry<PageModel>): Page {
   const { title, heroImage, content, slug } = entry.fields;
   const { id } = entry.sys;
 
@@ -32,17 +37,20 @@ function parseEntryToPage(entry: Entry<PageModel>): Page {
   return page;
 }
 
-export async function getPageBySlug(
-  slug: string,
-  preview = false
-): Promise<Page> {
+/**
+ *
+ * @param slug Slug of page
+ * @param preview Preview-mode
+ * @returns Page
+ */
+export async function getPage(slug: string, preview = false): Promise<Page> {
   const data = await (preview ? previewClient : client).getEntries<PageModel>({
     content_type: "page",
     "fields.slug[match]": slug,
     select: "sys.id,fields",
   });
 
-  const page = parseEntryToPage(data.items[0]);
+  const page = parsePage(data.items[0]);
 
   return page;
 }
@@ -54,7 +62,12 @@ interface AppModel {
   footbar: Entry<PageModel>[];
 }
 
-function parsePageToRoute({ slug, title, id }: Page): Route {
+/**
+ * Parses page to route
+ * @param page Page of route
+ * @returns Route
+ */
+function parseRoute({ slug, title, id }: Page): Route {
   return {
     slug,
     title,
@@ -63,6 +76,10 @@ function parsePageToRoute({ slug, title, id }: Page): Route {
   };
 }
 
+/**
+ * Fetches and returns metadata of app
+ * @returns Metadata
+ */
 export async function getMetadata(): Promise<Metadata> {
   const data = await client.getEntry<AppModel>("4aS9BmUxul6TfbSHx5qYbf", {
     content_type: "app",
@@ -77,19 +94,21 @@ export async function getMetadata(): Promise<Metadata> {
       description: fields.favIcon.fields.description,
     },
     metaDescription: fields.metaDescription,
-    navbarRoutes: fields.navbar.map(parseEntryToPage).map(parsePageToRoute),
-    footbarRoutes: fields.footbar.map(parseEntryToPage).map(parsePageToRoute),
+    navbarRoutes: fields.navbar.map(parsePage).map(parseRoute),
+    footbarRoutes: fields.footbar.map(parsePage).map(parseRoute),
   };
 }
 
+/**
+ * Fetches and returns all page routes
+ * @returns All routes
+ */
 export async function getAllPageRoutes(): Promise<Route[]> {
   const data = await client.getEntries<PageModel>({
     content_type: "page",
   });
 
-  const routes: Route[] = data.items
-    .map(parseEntryToPage)
-    .map(parsePageToRoute);
+  const routes: Route[] = data.items.map(parsePage).map(parseRoute);
 
   return routes;
 }
