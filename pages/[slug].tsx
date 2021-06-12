@@ -5,7 +5,7 @@ import {
 } from "next";
 import React from "react";
 
-import BlockRenderer from "../components/ContentRenderer";
+import ContentRenderer from "../components/ContentRenderer";
 import Menu from "../components/Menu";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
@@ -21,7 +21,7 @@ function Page({ content, menu, id, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
-        <BlockRenderer content={content} />
+        <ContentRenderer content={content} />
         {/* Speisekarte-ID */}
         {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
       </main>

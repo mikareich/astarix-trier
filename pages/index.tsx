@@ -1,7 +1,7 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React from "react";
 
-import BlockRenderer from "../components/ContentRenderer";
+import ContentRenderer from "../components/ContentRenderer";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
@@ -11,7 +11,7 @@ function Index({ content, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
-        <BlockRenderer content={content} />
+        <ContentRenderer content={content} />
       </main>
       <StateUpdater {...{ content, ...restProps }} />
     </>
