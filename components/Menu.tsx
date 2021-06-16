@@ -1,4 +1,10 @@
+import { motion, Variant, Variants } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import {
+  MdArrowDownward,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+} from "react-icons/md";
 
 import { Category as CategoryProps } from "../interfaces";
 import menuStyles from "../styles/Menu.module.scss";
@@ -11,6 +17,7 @@ interface MenuProps {
 function Menu({ menu }: MenuProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryProps>();
   const [scrollPosition, setScrollPosition] = useState<number>();
+  const [showToc, setShowToc] = useState(true);
 
   const updateScrollPosition = () =>
     typeof window === "object" && setScrollPosition(window.scrollY + 180);
@@ -18,6 +25,17 @@ function Menu({ menu }: MenuProps) {
   useEffect(() => {
     window.addEventListener("scroll", updateScrollPosition);
   }, []);
+
+  const animationVariants: Variants = {
+    show: {
+      height: "100%",
+    },
+    hidden: {
+      height: "0px",
+    },
+  };
+
+  const toggleToc = () => setShowToc(!showToc);
 
   return (
     <div className={menuStyles.menu}>
@@ -42,8 +60,27 @@ function Menu({ menu }: MenuProps) {
       </div>
 
       <div className={menuStyles.toc}>
-        <h3>Übersicht</h3>
-        <ol>
+        <header className={menuStyles.tocHeader}>
+          <h3>Übersicht</h3>
+          <button
+            type="button"
+            className={menuStyles.iconButton}
+            onClick={toggleToc}
+          >
+            {showToc ? (
+              <MdKeyboardArrowUp size={24} />
+            ) : (
+              <MdKeyboardArrowDown size={24} />
+            )}
+          </button>
+        </header>
+        <motion.ol
+          variants={animationVariants}
+          animate={showToc ? "show" : "hidden"}
+          initial="show"
+          transition={{ duration: 0.2 }}
+          className={menuStyles.tocList}
+        >
           {menu.map((category) => {
             const isActive = category.id === activeCategory?.id;
 
@@ -51,7 +88,7 @@ function Menu({ menu }: MenuProps) {
               <li key={category.id} className={menuStyles.tocItem}>
                 <a
                   href={`#${category.title}`}
-                  className={`${isActive ? "" : "inactive"}`}
+                  className={`${isActive ? "" : "inactive"} ${menuStyles.link}`}
                   onClick={() => setActiveCategory(category)}
                 >
                   {category.title}
@@ -59,7 +96,7 @@ function Menu({ menu }: MenuProps) {
               </li>
             );
           })}
-        </ol>
+        </motion.ol>
       </div>
     </div>
   );
