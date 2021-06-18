@@ -19,6 +19,11 @@ interface ProductModel {
   price: number;
 }
 
+/**
+ * Parses entry to category
+ * @param categoryEntry Category entry
+ * @returns Parsed category
+ */
 function parseCategory(categoryEntry: Entry<CollectionModel>): Category {
   const { fields, sys } = categoryEntry;
 
@@ -30,6 +35,11 @@ function parseCategory(categoryEntry: Entry<CollectionModel>): Category {
   };
 }
 
+/**
+ * Parses entry to product
+ * @param productEntry Product entry
+ * @returns Parsed product
+ */
 function parseProduct(productEntry: Entry<ProductModel>): Product {
   const { fields, sys } = productEntry;
 
@@ -40,6 +50,7 @@ function parseProduct(productEntry: Entry<ProductModel>): Product {
     price: fields.price,
     vegan: fields.vegan,
     variants:
+      // parse variant entry to variant
       fields?.variants?.map(({ key, value, id }) => ({
         variant: key,
         id,
@@ -48,6 +59,10 @@ function parseProduct(productEntry: Entry<ProductModel>): Product {
   };
 }
 
+/**
+ * Fetches and parses menu from cms
+ * @returns Menu
+ */
 export default async function getMenu(): Promise<Category[]> {
   const data = await client.getEntries<CollectionModel>({
     content_type: "collection",

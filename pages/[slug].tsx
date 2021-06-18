@@ -5,7 +5,7 @@ import {
 } from "next";
 import React from "react";
 
-import BlockRenderer from "../components/ContentRenderer";
+import ContentRenderer from "../components/ContentRenderer";
 import Menu from "../components/Menu";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
@@ -14,14 +14,14 @@ import {
   getAllPageRoutes,
   getMenu,
   getMetadata,
-  getPageBySlug,
+  getPage,
 } from "../utils/contentful";
 
 function Page({ content, menu, id, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
-        <BlockRenderer content={content} />
+        <ContentRenderer content={content} />
         {/* Speisekarte-ID */}
         {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
       </main>
@@ -57,7 +57,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
-  const pageProps = await getPageBySlug(slug, ctx.preview);
+  const pageProps = await getPage(slug, ctx.preview);
   const metadata = await getMetadata();
   const menu = await getMenu();
 

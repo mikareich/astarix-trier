@@ -1,17 +1,17 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React from "react";
 
-import BlockRenderer from "../components/ContentRenderer";
+import ContentRenderer from "../components/ContentRenderer";
 import StateUpdater from "../components/StateUpdater";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
-import { getMetadata, getPageBySlug } from "../utils/contentful";
+import { getMetadata, getPage } from "../utils/contentful";
 
 function Index({ content, ...restProps }: PageProps) {
   return (
     <>
       <main className={layoutStyles.main}>
-        <BlockRenderer content={content} />
+        <ContentRenderer content={content} />
       </main>
       <StateUpdater {...{ content, ...restProps }} />
     </>
@@ -21,7 +21,7 @@ function Index({ content, ...restProps }: PageProps) {
 export async function getStaticProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<PageProps>> {
-  const pageProps = await getPageBySlug("", ctx.preview);
+  const pageProps = await getPage("", ctx.preview);
   const metadata = await getMetadata();
 
   return {

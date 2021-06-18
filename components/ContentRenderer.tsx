@@ -60,8 +60,8 @@ const options: Options = {
   },
 };
 
-function BlockRenderer({ content }: BlockRendererProps) {
+function ContentRenderer({ content }: BlockRendererProps) {
   return <>{documentToReactComponents(content, options)}</>;
 }
 
-export default BlockRenderer;
+export default ContentRenderer;
