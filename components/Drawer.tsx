@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -19,7 +19,7 @@ function Drawer({ routes }: DrawerProps) {
 
   const closeDrawer = () => setDrawer(false);
 
-  const variants = {
+  const variants: Variants = {
     visible: {
       opacity: 1,
       display: "block",

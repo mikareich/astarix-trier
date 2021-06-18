@@ -12,24 +12,38 @@
   position: sticky;
   top: 100px;
   height: calc(100vh - 100px);
-  width: clamp(100px, 200px, 200px);
+  width: clamp(100px, auto, 400px);
   margin-left: 20px;
   overflow-y: auto;
+}
+
+.tocHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .tocItem {
   margin-bottom: 20px;
 }
 
-.tocItem,
-.link {
-  font-size: large;
-  color: $gray;
-}
-
-.link {
-  width: 100%;
-  height: 100%;
+.iconButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  display: none;
+  float: right;
 }
 
 @media screen and (max-width: 768px) {
@@ -44,5 +58,14 @@
     top: 0;
     grid-row: 1;
     margin-left: 0;
+    height: fit-content;
+  }
+
+  .iconButton {
+    display: block;
+  }
+
+  .tocList {
+    overflow: hidden;
   }
 }
