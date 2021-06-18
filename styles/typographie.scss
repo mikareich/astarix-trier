@@ -37,27 +37,6 @@ h6 {
   font-size: 1rem;
 }
 
-a {
-  font-family: "Open Sans", sans-serif;
-  text-decoration: unset;
-  color: $red;
-  transition: 200ms;
-}
-
-a.inactive {
-  color: $gray;
-}
-
-a.active,
-a:hover,
-a:focus {
-  color: $red !important;
-}
-
-a.active {
-  font-weight: bold;
-}
-
 hr {
   border: none;
   width: 100%;

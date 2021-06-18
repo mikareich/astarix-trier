@@ -1,0 +1,18 @@
+@import "./colors.scss";
+
+.link {
+  font-family: "Open Sans", sans-serif;
+  text-decoration: unset;
+  transition: 200ms;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.active {
+  color: $red;
+}
+
+.inactive {
+  color: $gray;
+}

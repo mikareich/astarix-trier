@@ -9,6 +9,7 @@ import {
 import { Category as CategoryProps } from "../interfaces";
 import menuStyles from "../styles/Menu.module.scss";
 import Category from "./Category";
+import Link from "./Link";
 
 interface MenuProps {
   menu: CategoryProps[];
@@ -86,13 +87,21 @@ function Menu({ menu }: MenuProps) {
 
             return (
               <li key={category.id} className={menuStyles.tocItem}>
-                <a
+                {/*  <a
                   href={`#${category.title}`}
                   className={`${isActive ? "" : "inactive"} ${menuStyles.link}`}
                   onClick={() => setActiveCategory(category)}
                 >
                   {category.title}
-                </a>
+                </a> */}
+                <Link
+                  href={`#${category.title}`}
+                  className={menuStyles.link}
+                  onClick={() => setActiveCategory(category)}
+                  active={isActive}
+                >
+                  {category.title}
+                </Link>
               </li>
             );
           })}

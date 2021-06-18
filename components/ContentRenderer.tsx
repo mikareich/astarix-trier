@@ -4,10 +4,10 @@ import {
 } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, Document, INLINES } from "@contentful/rich-text-types";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 import layoutStyles from "../styles/Layout.module.scss";
+import Link from "./Link";
 
 interface BlockRendererProps {
   content: Document;
@@ -16,9 +16,8 @@ interface BlockRendererProps {
 const options: Options = {
   renderNode: {
     [INLINES.HYPERLINK]: ({ data }, children) => (
-      <Link href={data.uri} passHref>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a href="#">{children}</a>
+      <Link href={data.uri} active>
+        {children}
       </Link>
     ),
     [BLOCKS.EMBEDDED_ASSET]: ({ data }) => {
