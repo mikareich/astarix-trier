@@ -50,7 +50,7 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
         })}
         <button
           type="button"
-          className={appBarStyles.iconButton}
+          className="iconButton"
           aria-label="Öffne Drawer/ Schließe Drawer"
         >
           {showDrawer ? (

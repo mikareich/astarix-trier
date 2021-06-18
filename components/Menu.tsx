@@ -65,8 +65,9 @@ function Menu({ menu }: MenuProps) {
           <h3>Übersicht</h3>
           <button
             type="button"
-            className={menuStyles.iconButton}
+            className="iconButton"
             onClick={toggleToc}
+            aria-label="Öffne/ Schließe Menu-Übersicht"
           >
             {showToc ? (
               <MdKeyboardArrowUp size={24} />
@@ -87,16 +88,8 @@ function Menu({ menu }: MenuProps) {
 
             return (
               <li key={category.id} className={menuStyles.tocItem}>
-                {/*  <a
-                  href={`#${category.title}`}
-                  className={`${isActive ? "" : "inactive"} ${menuStyles.link}`}
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category.title}
-                </a> */}
                 <Link
                   href={`#${category.title}`}
-                  className={menuStyles.link}
                   onClick={() => setActiveCategory(category)}
                   active={isActive}
                 >

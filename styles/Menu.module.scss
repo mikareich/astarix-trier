@@ -35,15 +35,8 @@
   margin-bottom: 20px;
 }
 
-.iconButton {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  width: 24px;
-  height: 24px;
+.tocHeader button {
   display: none;
-  float: right;
 }
 
 @media screen and (max-width: 768px) {
@@ -61,7 +54,7 @@
     height: fit-content;
   }
 
-  .iconButton {
+  .tocHeader button {
     display: block;
   }
 

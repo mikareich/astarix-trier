@@ -30,6 +30,16 @@ iframe {
   width: 100%;
 }
 
+.iconButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  float: right;
+}
+
 @media screen and (max-width: 568px) {
   .gmap_canvas,
   .mapouter,
