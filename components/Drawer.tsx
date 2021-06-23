@@ -1,20 +1,17 @@
 import { motion, Variants } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilState } from "recoil";
 
 import { Route } from "../interfaces";
 import drawerStyles from "../styles/Drawer.module.scss";
 import { drawerState } from "../utils/atoms";
+import Link from "./Link";
 
 interface DrawerProps {
   routes: Route[];
 }
 
 function Drawer({ routes }: DrawerProps) {
-  const router = useRouter();
-
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
 
   const closeDrawer = () => setDrawer(false);
@@ -41,22 +38,11 @@ function Drawer({ routes }: DrawerProps) {
       transition={{ duration: 0.2 }}
     >
       <div className={drawerStyles.drawer}>
-        {routes.map(({ title, slug }) => {
-          const isActive = router.asPath === `/${slug}`;
-          const className = `
-          ${drawerStyles.link} 
-          ${isActive ? "active" : "inactive"}
-          `;
-
-          return (
-            <Link href={`/${slug}`} passHref key={slug}>
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a href="#" className={className} onClick={closeDrawer}>
-                {title}
-              </a>
-            </Link>
-          );
-        })}
+        {routes.map(({ title, slug }) => (
+          <Link href={`/${slug}`} key={slug} onClick={closeDrawer}>
+            {title}
+          </Link>
+        ))}
       </div>
     </motion.aside>
   );

@@ -44,11 +44,17 @@ function parsePage(entry: Entry<PageModel>): Page {
  * @returns Page
  */
 export async function getPage(slug: string, preview = false): Promise<Page> {
-  const data = await (preview ? previewClient : client).getEntries<PageModel>({
-    content_type: "page",
-    "fields.slug[match]": slug,
-    select: "sys.id,fields",
-  });
+  const query = { content_type: "page", select: "sys.id,fields" };
+
+  if (slug) {
+    query["fields.slug[match]"] = slug;
+  } else {
+    query["sys.id[match]"] = "7qFU0oIrQlFr5R2tORmyFQ";
+  }
+
+  const data = await (preview ? previewClient : client).getEntries<PageModel>(
+    query
+  );
 
   const page = parsePage(data.items[0]);
 

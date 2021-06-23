@@ -30,21 +30,8 @@
   margin-right: auto;
 }
 
-.link:not(.leading) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.iconButton {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  width: 24px;
-  height: 24px;
+.appBar button {
   display: none;
-  margin-left: auto;
 }
 
 @media (max-width: 1024px) {
@@ -69,7 +56,7 @@
     padding: 0px 30px;
   }
 
-  .top .iconButton {
+  .appBar button {
     display: block;
   }
 
