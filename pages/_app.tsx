@@ -4,11 +4,7 @@ import React from "react";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { RecoilRoot, useRecoilValue } from "recoil";
 
-import AppBar from "../components/AppBar";
-import Drawer from "../components/Drawer";
-import HeroImage from "../components/HeroImage";
-import Layout from "../components/Layout";
-import Logo from "../components/Logo";
+import { AppBar, Drawer, HeroImage, Layout, Logo } from "../components";
 import { Page, Route } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
