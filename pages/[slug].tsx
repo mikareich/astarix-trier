@@ -55,7 +55,7 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<PageProps>> {
   const { slug } = ctx.params;
 
-  const pageProps = await getPage(slug, ctx.preview);
+  const pageProps = await getPage({ slug }, ctx.preview);
   const metadata = await getMetadata();
   const menu = await getMenu();
 

@@ -37,26 +37,37 @@ function parsePage(entry: Entry<PageModel>): Page {
   return page;
 }
 
+interface Identifier {
+  slug?: string;
+  id?: string;
+}
+
 /**
- *
- * @param slug Slug of page
+ * Returns page
+ * @param identifier Id or slug of page
  * @param preview Preview-mode
  * @returns Page
  */
-export async function getPage(slug: string, preview = false): Promise<Page> {
+export async function getPage(
+  { slug, id }: Identifier,
+  preview = false
+): Promise<Page> {
+  const dedicatedClient = preview ? previewClient : client;
+
   const query = { content_type: "page", select: "sys.id,fields" };
+  let pageData: Entry<PageModel>;
 
   if (slug) {
     query["fields.slug[match]"] = slug;
-  } else {
-    query["sys.id[match]"] = "7qFU0oIrQlFr5R2tORmyFQ";
+    const entryCollection = await dedicatedClient.getEntries<PageModel>(query);
+    [pageData] = entryCollection.items;
   }
 
-  const data = await (preview ? previewClient : client).getEntries<PageModel>(
-    query
-  );
+  if (id) {
+    pageData = await dedicatedClient.getEntry<PageModel>(id, query);
+  }
 
-  const page = parsePage(data.items[0]);
+  const page = parsePage(pageData);
 
   return page;
 }

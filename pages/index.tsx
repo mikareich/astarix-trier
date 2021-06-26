@@ -20,7 +20,10 @@ function Index({ content, ...restProps }: PageProps) {
 export async function getStaticProps(
   ctx: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<PageProps>> {
-  const pageProps = await getPage("", ctx.preview);
+  const pageProps = await getPage(
+    { id: "7qFU0oIrQlFr5R2tORmyFQ" },
+    ctx.preview
+  );
   const metadata = await getMetadata();
 
   return {
