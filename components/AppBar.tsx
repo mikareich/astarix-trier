@@ -45,17 +45,19 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
             </Link>
           );
         })}
-        <button
-          type="button"
-          className="iconButton"
-          aria-label="Öffne Drawer/ Schließe Drawer"
-        >
-          {showDrawer ? (
-            <MdClose size={24} onClick={toggleDrawer} />
-          ) : (
-            <MdMenu size={24} onClick={toggleDrawer} />
-          )}
-        </button>
+        {position === "top" && (
+          <button
+            type="button"
+            className="iconButton"
+            aria-label="Öffne Drawer/ Schließe Drawer"
+          >
+            {showDrawer ? (
+              <MdClose size={24} onClick={toggleDrawer} />
+            ) : (
+              <MdMenu size={24} onClick={toggleDrawer} />
+            )}
+          </button>
+        )}
       </nav>
     </>
   );
