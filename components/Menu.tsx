@@ -1,10 +1,6 @@
-import { motion, Variant, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  MdArrowDownward,
-  MdKeyboardArrowDown,
-  MdKeyboardArrowUp,
-} from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 import { Category as CategoryProps } from "../interfaces";
 import menuStyles from "../styles/Menu.module.scss";
