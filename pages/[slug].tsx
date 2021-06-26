@@ -5,9 +5,7 @@ import {
 } from "next";
 import React from "react";
 
-import ContentRenderer from "../components/ContentRenderer";
-import Menu from "../components/Menu";
-import StateUpdater from "../components/StateUpdater";
+import { ContentRenderer, Menu, StateUpdater } from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {

@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React from "react";
 import { MdClose, MdMenu } from "react-icons/md";
 import { useRecoilState } from "recoil";
@@ -14,8 +13,6 @@ interface AppProps {
 }
 
 const AppBar: React.FC<AppProps> = ({ routes, position }) => {
-  const router = useRouter();
-
   const [showDrawer, setDrawer] = useRecoilState(drawerState);
 
   const toggleDrawer = () => setDrawer(!showDrawer);
@@ -48,17 +45,19 @@ const AppBar: React.FC<AppProps> = ({ routes, position }) => {
             </Link>
           );
         })}
-        <button
-          type="button"
-          className="iconButton"
-          aria-label="Öffne Drawer/ Schließe Drawer"
-        >
-          {showDrawer ? (
-            <MdClose size={24} onClick={toggleDrawer} />
-          ) : (
-            <MdMenu size={24} onClick={toggleDrawer} />
-          )}
-        </button>
+        {position === "top" && (
+          <button
+            type="button"
+            className="iconButton"
+            aria-label="Öffne Drawer/ Schließe Drawer"
+          >
+            {showDrawer ? (
+              <MdClose size={24} onClick={toggleDrawer} />
+            ) : (
+              <MdMenu size={24} onClick={toggleDrawer} />
+            )}
+          </button>
+        )}
       </nav>
     </>
   );

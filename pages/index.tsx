@@ -1,8 +1,7 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React from "react";
 
-import ContentRenderer from "../components/ContentRenderer";
-import StateUpdater from "../components/StateUpdater";
+import { ContentRenderer, StateUpdater } from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMetadata, getPage } from "../utils/contentful";
