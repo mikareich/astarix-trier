@@ -8,13 +8,9 @@ import { AppBar, Drawer, HeroImage, Layout, Logo } from "../components";
 import { Page, Route } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
-  descriptionState,
-  favIconState,
   footbarRoutesState,
-  heroState,
   navbarRoutesState,
   previewState,
-  titleState,
 } from "../utils/atoms";
 
 export interface AppProps {
@@ -23,7 +19,6 @@ export interface AppProps {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  const heroImage = useRecoilValue(heroState);
   const preview = useRecoilValue(previewState);
 
   // format routes
@@ -59,7 +54,6 @@ function App({ Component, pageProps }: AppProps) {
         <header className={layoutStyles.navBar}>
           <AppBar routes={navbarRoutes} position="top" />
         </header>
-        <HeroImage src={heroImage.url} description={heroImage.description} />
         <Component {...pageProps} />
         <footer className={layoutStyles.footer}>
           <AppBar routes={footbarRoutes} position="bottom" />

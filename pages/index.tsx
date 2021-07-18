@@ -1,7 +1,12 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React from "react";
 
-import { ContentRenderer, Layout, StateUpdater } from "../components";
+import {
+  ContentRenderer,
+  HeroImage,
+  Layout,
+  StateUpdater,
+} from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMetadata, getPage } from "../utils/contentful";
@@ -11,7 +16,10 @@ function Index({
   title,
   metaDescription,
   favIcon,
-  ...restProps
+  heroImage,
+  navbarRoutes,
+  footbarRoutes,
+  preview,
 }: PageProps) {
   return (
     <>
@@ -20,12 +28,11 @@ function Index({
         metaDescription={metaDescription}
         favIcon={favIcon}
       >
+        <HeroImage src={heroImage.url} description={heroImage.description} />
         <main className={layoutStyles.main}>
           <ContentRenderer content={content} />
         </main>
-        <StateUpdater
-          {...{ content, title, metaDescription, favIcon, ...restProps }}
-        />
+        <StateUpdater {...{ navbarRoutes, footbarRoutes, preview }} />
       </Layout>
     </>
   );
