@@ -8,13 +8,9 @@ import { AppBar, Drawer, HeroImage, Layout, Logo } from "../components";
 import { Page, Route } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
-  descriptionState,
-  favIconState,
   footbarRoutesState,
-  heroState,
   navbarRoutesState,
   previewState,
-  titleState,
 } from "../utils/atoms";
 
 export interface AppProps {
@@ -23,15 +19,11 @@ export interface AppProps {
 }
 
 function App({ Component, pageProps }: AppProps) {
-  const heroImage = useRecoilValue(heroState);
-  const title = useRecoilValue(titleState);
-  const description = useRecoilValue(descriptionState);
-  const favIcon = useRecoilValue(favIconState);
   const preview = useRecoilValue(previewState);
 
   // format routes
 
-  const leadingRouteAsImage = (route: Route, navbar): Route => ({
+  const leadingRouteAsImage = (route: Route, navbar: boolean): Route => ({
     ...route,
     title:
       (route.leading &&
@@ -56,13 +48,12 @@ function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
+    <>
       <Drawer routes={drawerRoutes} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
           <AppBar routes={navbarRoutes} position="top" />
         </header>
-        <HeroImage src={heroImage.url} description={heroImage.description} />
         <Component {...pageProps} />
         <footer className={layoutStyles.footer}>
           <AppBar routes={footbarRoutes} position="bottom" />
@@ -73,7 +64,7 @@ function App({ Component, pageProps }: AppProps) {
           </a>
         )}
       </div>
-    </Layout>
+    </>
   );
 }
 

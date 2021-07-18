@@ -5,7 +5,13 @@ import {
 } from "next";
 import React from "react";
 
-import { ContentRenderer, Menu, StateUpdater } from "../components";
+import {
+  ContentRenderer,
+  HeroImage,
+  Layout,
+  Menu,
+  StateUpdater,
+} from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
@@ -15,15 +21,33 @@ import {
   getPage,
 } from "../utils/contentful";
 
-function Page({ content, menu, id, ...restProps }: PageProps) {
+function Page({
+  content,
+  menu,
+  id,
+  title,
+  metaDescription,
+  favIcon,
+  heroImage,
+  navbarRoutes,
+  footbarRoutes,
+  preview,
+}: PageProps) {
   return (
     <>
-      <main className={layoutStyles.main}>
-        <ContentRenderer content={content} />
-        {/* Speisekarte-ID */}
-        {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
-      </main>
-      <StateUpdater {...{ content, menu, id, ...restProps }} />
+      <Layout
+        pageTitle={`Astarix Trier | ${title}`}
+        metaDescription={metaDescription}
+        favIcon={favIcon}
+      >
+        <HeroImage src={heroImage.url} description={heroImage.description} />
+        <main className={layoutStyles.main}>
+          <ContentRenderer content={content} />
+          {/* Speisekarte-ID */}
+          {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
+        </main>
+        <StateUpdater {...{ navbarRoutes, footbarRoutes, preview }} />
+      </Layout>
     </>
   );
 }

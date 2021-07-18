@@ -1,39 +1,29 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import { PageProps } from "../interfaces";
+import { PageProps, Route } from "../interfaces";
 import {
-  descriptionState,
-  favIconState,
   footbarRoutesState,
-  heroState,
   navbarRoutesState,
   previewState,
-  titleState,
 } from "../utils/atoms";
 
+interface StateUpdaterProps {
+  navbarRoutes: Route[];
+  footbarRoutes: Route[];
+  preview: boolean;
+}
+
 function StateUpdater({
-  title,
-  heroImage,
-  metaDescription,
-  favIcon,
   navbarRoutes,
   footbarRoutes,
   preview,
-}: PageProps) {
-  const [, setTitle] = useRecoilState(titleState);
-  const [, setDescription] = useRecoilState(descriptionState);
-  const [, setFavIcon] = useRecoilState(favIconState);
-  const [, setHeroImage] = useRecoilState(heroState);
+}: StateUpdaterProps) {
   const [, setNavbarRoutes] = useRecoilState(navbarRoutesState);
   const [, setFootbarRoutes] = useRecoilState(footbarRoutesState);
   const [, setPreview] = useRecoilState(previewState);
 
   useEffect(() => {
-    setTitle(`Astarix Trier | ${title}`);
-    setDescription(metaDescription);
-    setFavIcon(favIcon);
-    setHeroImage(heroImage);
     setNavbarRoutes(navbarRoutes);
     setFootbarRoutes(footbarRoutes);
     setPreview(preview);
