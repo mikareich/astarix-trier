@@ -1,18 +1,32 @@
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import React from "react";
 
-import { ContentRenderer, StateUpdater } from "../components";
+import { ContentRenderer, Layout, StateUpdater } from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import { getMetadata, getPage } from "../utils/contentful";
 
-function Index({ content, ...restProps }: PageProps) {
+function Index({
+  content,
+  title,
+  metaDescription,
+  favIcon,
+  ...restProps
+}: PageProps) {
   return (
     <>
-      <main className={layoutStyles.main}>
-        <ContentRenderer content={content} />
-      </main>
-      <StateUpdater {...{ content, ...restProps }} />
+      <Layout
+        pageTitle={`Astarix Trier | ${title}`}
+        metaDescription={metaDescription}
+        favIcon={favIcon}
+      >
+        <main className={layoutStyles.main}>
+          <ContentRenderer content={content} />
+        </main>
+        <StateUpdater
+          {...{ content, title, metaDescription, favIcon, ...restProps }}
+        />
+      </Layout>
     </>
   );
 }

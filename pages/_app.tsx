@@ -24,14 +24,11 @@ export interface AppProps {
 
 function App({ Component, pageProps }: AppProps) {
   const heroImage = useRecoilValue(heroState);
-  const title = useRecoilValue(titleState);
-  const description = useRecoilValue(descriptionState);
-  const favIcon = useRecoilValue(favIconState);
   const preview = useRecoilValue(previewState);
 
   // format routes
 
-  const leadingRouteAsImage = (route: Route, navbar): Route => ({
+  const leadingRouteAsImage = (route: Route, navbar: boolean): Route => ({
     ...route,
     title:
       (route.leading &&
@@ -56,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <Layout pageTitle={title} metaDescription={description} favIcon={favIcon}>
+    <>
       <Drawer routes={drawerRoutes} />
       <div className={layoutStyles.layout}>
         <header className={layoutStyles.navBar}>
@@ -73,7 +70,7 @@ function App({ Component, pageProps }: AppProps) {
           </a>
         )}
       </div>
-    </Layout>
+    </>
   );
 }
 

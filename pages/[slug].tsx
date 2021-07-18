@@ -5,7 +5,7 @@ import {
 } from "next";
 import React from "react";
 
-import { ContentRenderer, Menu, StateUpdater } from "../components";
+import { ContentRenderer, Layout, Menu, StateUpdater } from "../components";
 import { PageProps } from "../interfaces";
 import layoutStyles from "../styles/Layout.module.scss";
 import {
@@ -15,15 +15,31 @@ import {
   getPage,
 } from "../utils/contentful";
 
-function Page({ content, menu, id, ...restProps }: PageProps) {
+function Page({
+  content,
+  menu,
+  id,
+  title,
+  metaDescription,
+  favIcon,
+  ...restProps
+}: PageProps) {
   return (
     <>
-      <main className={layoutStyles.main}>
-        <ContentRenderer content={content} />
-        {/* Speisekarte-ID */}
-        {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
-      </main>
-      <StateUpdater {...{ content, menu, id, ...restProps }} />
+      <Layout
+        pageTitle={`Astarix Trier | ${title}`}
+        metaDescription={metaDescription}
+        favIcon={favIcon}
+      >
+        <main className={layoutStyles.main}>
+          <ContentRenderer content={content} />
+          {/* Speisekarte-ID */}
+          {id === "5pi929rdlMYzouwXnB63Su" && <Menu menu={menu} />}
+        </main>
+        <StateUpdater
+          {...{ content, id, title, metaDescription, favIcon, ...restProps }}
+        />
+      </Layout>
     </>
   );
 }
